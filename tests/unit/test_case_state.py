@@ -1,9 +1,10 @@
-from typing import get_args
 from datetime import date
+from typing import get_args
+
 import pytest
 
-from nbfc_ews.domain.models import CaseState, EventType, Case, Event
-from nbfc_ews.domain.case_state import _TRANSITIONS, apply_event, InvalidTransition
+from nbfc_ews.domain.case_state import _TRANSITIONS, InvalidTransition, apply_event
+from nbfc_ews.domain.models import Case, CaseState, Event, EventType
 
 VALID_STATES = set(get_args(CaseState))
 VALID_EVENTS = set(get_args(EventType))

@@ -1,5 +1,6 @@
 from datetime import date
 
+import psycopg
 import pytest
 
 from nbfc_ews.db.repositories.cases import (
@@ -56,5 +57,5 @@ def test_escalate_changes_type_and_writes_event(conn):
 def test_second_open_case_for_same_account_is_refused(conn):
     create_case(conn, "TEST-A1", "bounce_pattern", _sig(), AS_OF)
 
-    with pytest.raises(Exception):
+    with pytest.raises(psycopg.errors.UniqueViolation):
         create_case(conn, "TEST-A1", "dpd_bucket_movement", _sig(), AS_OF)

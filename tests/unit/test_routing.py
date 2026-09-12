@@ -18,9 +18,7 @@ def test_more_severe_signal_escalates():
 
 def test_every_signal_type_has_a_severity():
     from nbfc_ews.domain.routing import _SEVERITY
-    from nbfc_ews.domain.signals import _RULES, AccountFacts
-
-    facts = AccountFacts(account_id="A1", dpd=0, dpd_last_month=0)
+    from nbfc_ews.domain.signals import _RULES
 
     emitted = set()
     for rule in _RULES:

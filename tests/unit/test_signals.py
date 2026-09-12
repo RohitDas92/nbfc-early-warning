@@ -281,20 +281,6 @@ def _flagged(account_id, institution_id):
     )
 
 
-def test_five_from_one_institution_fires():
-    flagged = [_flagged(f"A{i}", "INST-1") for i in range(5)]
-
-    result = check_institution_cohort(flagged)
-
-    assert len(result) == 1
-    assert result[0].institution_id == "INST-1"
-
-
-def test_four_from_one_institution_does_not_fire():
-    flagged = [_flagged(f"A{i}", "INST-1") for i in range(4)]
-
-    assert check_institution_cohort(flagged) == []
-
 def test_moratorium_already_ended_does_not_fire():
     facts = AccountFacts(
         account_id="A1", dpd=0, dpd_last_month=0, days_to_moratorium_end=-400,

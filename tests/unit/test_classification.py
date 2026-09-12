@@ -1,6 +1,6 @@
 import pytest
 
-from nbfc_ews.domain.classification import bucket_of, asset_class_of
+from nbfc_ews.domain.classification import asset_class_of, bucket_of
 
 
 @pytest.mark.parametrize("dpd,expected", [

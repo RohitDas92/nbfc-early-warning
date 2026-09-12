@@ -1,7 +1,8 @@
-from dataclasses import dataclass
 from collections import Counter
+from dataclasses import dataclass
 
 from nbfc_ews.domain.classification import bucket_of
+
 
 @dataclass(frozen= True)
 class AccountFacts:

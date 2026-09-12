@@ -1,7 +1,7 @@
 from dataclasses import replace
-from datetime import datetime
 
 from nbfc_ews.domain.models import Case, CaseState, Event, EventType
+
 
 class InvalidTransition(Exception):
     """Raise when an event is not permitted from 

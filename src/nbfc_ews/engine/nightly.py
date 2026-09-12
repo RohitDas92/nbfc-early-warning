@@ -10,6 +10,7 @@ from nbfc_ews.db.repositories.cases import (
 from nbfc_ews.engine.detect import detect
 from nbfc_ews.engine.route import route_signals
 
+
 @dataclass(frozen=True)
 class NightlyRun:
     as_of: date
