@@ -76,6 +76,7 @@ def check_moratorium_ending(facts:AccountFacts) -> Signal | None:
             signal_type="moratorium_ending",
             detail = f"moratorium ends in {facts.days_to_moratorium_end} days",
         )
+    return None
 
 def check_payment_date_drift(facts: AccountFacts) -> Signal | None:
     """Fires when payment land progressively later each month."""
@@ -92,6 +93,7 @@ def check_payment_date_drift(facts: AccountFacts) -> Signal | None:
             signal_type="payment_date_drift",
             detail = f"payment day moved {days[0]} to {days[2]} over 3 months",
         )
+    return None
 
 def check_part_payment(facts:AccountFacts) -> Signal | None:
     """Fires when the borrower services the loan but cannot cover the full EMI"""
