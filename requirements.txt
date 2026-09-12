@@ -1,0 +1,4 @@
+pydantic>=2.7,<3
+psycopg[binary]
+pytest
+alembic

@@ -1,0 +1,188 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 1060" width="940" height="1060" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <rect width="940" height="1060" fill="#FBFBFC"/>
+  <defs>
+    <marker id="a" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#8A9099"/></marker>
+    <marker id="ap" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#6D4E9C"/></marker>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#A54A4A"/></marker>
+  </defs>
+
+  <text x="470" y="30" text-anchor="middle" font-size="17" font-weight="700" fill="#14161A">The Investigation Graph</text>
+  <text x="470" y="49" text-anchor="middle" font-size="11" fill="#6A7079">What happens to one case. Solid edges are fixed; dashed edges are conditional.</text>
+
+  <!-- INPUT -->
+  <rect x="60" y="76" width="560" height="42" rx="6" fill="#E8EEF7" stroke="#4A6FA5" stroke-width="1.3"/>
+  <text x="340" y="94" text-anchor="middle" font-size="12" font-weight="600" fill="#14161A">Prioritised case</text>
+  <text x="340" y="108" text-anchor="middle" font-size="9" fill="#6A7079">from the deterministic router — signals attached, ~60–80 per week</text>
+  <path d="M340 118 L340 142" stroke="#8A9099" stroke-width="1.4" marker-end="url(#a)"/>
+
+  <!-- COMPUTE FACTS -->
+  <rect x="60" y="144" width="560" height="44" rx="6" fill="#FDF0E3" stroke="#B57A3C" stroke-width="1.3"/>
+  <text x="340" y="163" text-anchor="middle" font-size="12" font-weight="600" fill="#14161A">Compute facts — deterministic, once</text>
+  <text x="340" y="177" text-anchor="middle" font-size="9" fill="#6A7079">bucket · DPD · POS · moratorium status · ticket · institution — so every agent argues from the same numbers</text>
+  <path d="M340 188 L340 212" stroke="#8A9099" stroke-width="1.4" marker-end="url(#a)"/>
+
+  <!-- SUPERVISOR -->
+  <rect x="60" y="214" width="560" height="56" rx="6" fill="#F0E9F7" stroke="#6D4E9C" stroke-width="1.6"/>
+  <text x="340" y="234" text-anchor="middle" font-size="13" font-weight="700" fill="#14161A">Triage Supervisor</text>
+  <text x="340" y="249" text-anchor="middle" font-size="9" fill="#6A7079">decides only three things: which investigators to run · whether a second round is needed · whether to escalate</text>
+  <text x="340" y="262" text-anchor="middle" font-size="8.5" fill="#6D4E9C" font-style="italic">everything else on this page is a fixed edge</text>
+
+  <path d="M340 270 L340 292" stroke="#6D4E9C" stroke-width="1.4"/>
+  <path d="M126 292 L554 292" stroke="#6D4E9C" stroke-width="1.4"/>
+  <path d="M126 292 L126 308" stroke="#6D4E9C" stroke-width="1.4" marker-end="url(#ap)"/>
+  <path d="M268 292 L268 308" stroke="#6D4E9C" stroke-width="1.4" marker-end="url(#ap)"/>
+  <path d="M410 292 L410 308" stroke="#6D4E9C" stroke-width="1.4" marker-end="url(#ap)"/>
+  <path d="M554 292 L554 308" stroke="#6D4E9C" stroke-width="1.4" marker-end="url(#ap)"/>
+  <text x="600" y="288" font-size="9" fill="#6D4E9C" text-anchor="end">run concurrently</text>
+
+  <!-- INVESTIGATORS -->
+  <g fill="#F6F2FB" stroke="#6D4E9C" stroke-width="1.2">
+    <rect x="60"  y="312" width="132" height="92" rx="6"/>
+    <rect x="202" y="312" width="132" height="92" rx="6"/>
+    <rect x="344" y="312" width="132" height="92" rx="6"/>
+    <rect x="486" y="312" width="134" height="92" rx="6"/>
+  </g>
+  <g text-anchor="middle" font-size="10.5" font-weight="700" fill="#14161A">
+    <text x="126" y="331">Repayment</text><text x="126" y="343">Behaviour</text>
+    <text x="268" y="331">External</text><text x="268" y="343">Behaviour</text>
+    <text x="410" y="331">Borrower</text><text x="410" y="343">Context</text>
+    <text x="553" y="337">Cohort</text>
+  </g>
+  <g text-anchor="middle" font-size="8" fill="#6A7079">
+    <text x="126" y="359">why are payments</text><text x="126" y="369">failing on our book?</text>
+    <text x="126" y="385" font-style="italic" fill="#5A5A78">presentations,</text><text x="126" y="394" font-style="italic" fill="#5A5A78">balances, schedule</text>
+    <text x="268" y="359">are they paying</text><text x="268" y="369">everyone but us?</text>
+    <text x="268" y="385" font-style="italic" fill="#5A5A78">bureau history</text><text x="268" y="394" font-style="italic" fill="#5A5A78">(read only)</text>
+    <text x="410" y="359">is the course or</text><text x="410" y="369">institution driving it?</text>
+    <text x="410" y="385" font-style="italic" fill="#5A5A78">institution profile,</text><text x="410" y="394" font-style="italic" fill="#5A5A78">events, tranches</text>
+    <text x="553" y="359">idiosyncratic, or is</text><text x="553" y="369">a group moving?</text>
+    <text x="553" y="385" font-style="italic" fill="#5A5A78">across the whole</text><text x="553" y="394" font-style="italic" fill="#5A5A78">alert set</text>
+  </g>
+  <text x="340" y="420" text-anchor="middle" font-size="9.5" fill="#A54A4A" font-style="italic">Round one: no investigator sees another's findings. Independence is what produces genuine disagreement.</text>
+
+  <path d="M126 404 L126 436 L340 436" stroke="#6D4E9C" stroke-width="1.2" fill="none"/>
+  <path d="M268 404 L268 436" stroke="#6D4E9C" stroke-width="1.2" fill="none"/>
+  <path d="M410 404 L410 436" stroke="#6D4E9C" stroke-width="1.2" fill="none"/>
+  <path d="M553 404 L553 436 L340 436" stroke="#6D4E9C" stroke-width="1.2" fill="none"/>
+  <path d="M340 436 L340 450" stroke="#6D4E9C" stroke-width="1.4" marker-end="url(#ap)"/>
+
+  <!-- COLLECT -->
+  <rect x="150" y="452" width="380" height="34" rx="6" fill="#EDEDF2" stroke="#5A5A78" stroke-width="1.2"/>
+  <text x="340" y="473" text-anchor="middle" font-size="11" font-weight="600" fill="#14161A">Collect findings — append-only, uniform shape</text>
+  <path d="M340 486 L340 502" stroke="#8A9099" stroke-width="1.4" marker-end="url(#a)"/>
+
+  <!-- CONFLICT DECISION -->
+  <polygon points="340,504 460,536 340,568 220,536" fill="#FBE9E9" stroke="#A54A4A" stroke-width="1.4"/>
+  <text x="340" y="533" text-anchor="middle" font-size="11" font-weight="700" fill="#14161A">Conflict?</text>
+  <text x="340" y="546" text-anchor="middle" font-size="8.5" fill="#6A7079">incompatible conclusions</text>
+
+  <path d="M460 536 L540 536 L540 580" stroke="#A54A4A" stroke-width="1.3" fill="none" stroke-dasharray="4 3" marker-end="url(#ar)"/>
+  <text x="500" y="530" font-size="9" fill="#A54A4A" text-anchor="middle">yes</text>
+  <rect x="452" y="582" width="176" height="46" rx="6" fill="#F0E9F7" stroke="#6D4E9C" stroke-width="1.3" stroke-dasharray="4 3"/>
+  <text x="540" y="601" text-anchor="middle" font-size="11" font-weight="600" fill="#14161A">Arbitration</text>
+  <text x="540" y="615" text-anchor="middle" font-size="8.5" fill="#6A7079">supervisor weighs the evidence</text>
+  <path d="M452 605 L392 605 L392 596" stroke="#6D4E9C" stroke-width="1.2" fill="none" stroke-dasharray="4 3"/>
+
+  <path d="M340 568 L340 596" stroke="#8A9099" stroke-width="1.4" marker-end="url(#a)"/>
+  <text x="352" y="586" font-size="9" fill="#6A7079">no</text>
+
+  <!-- POLICY -->
+  <rect x="60" y="598" width="376" height="52" rx="6" fill="#F0E9F7" stroke="#6D4E9C" stroke-width="1.3"/>
+  <text x="248" y="617" text-anchor="middle" font-size="12" font-weight="700" fill="#14161A">Action &amp; Policy Investigator</text>
+  <text x="248" y="631" text-anchor="middle" font-size="8.5" fill="#6A7079">what is permitted (RBI, SOP, settlement) · what has actually worked (intervention history)</text>
+  <text x="248" y="644" text-anchor="middle" font-size="8.5" fill="#A54A4A">runs last, on confirmed findings only · no clause found → refuse and escalate</text>
+  <path d="M248 650 L248 672" stroke="#8A9099" stroke-width="1.4" marker-end="url(#a)"/>
+
+  <!-- COMPOSE -->
+  <rect x="60" y="674" width="376" height="44" rx="6" fill="#F0E9F7" stroke="#6D4E9C" stroke-width="1.3"/>
+  <text x="248" y="693" text-anchor="middle" font-size="12" font-weight="600" fill="#14161A">Compose narrative + recommendation</text>
+  <text x="248" y="707" text-anchor="middle" font-size="8.5" fill="#6A7079">association, never causation · every figure carries its citation</text>
+  <path d="M248 718 L248 740" stroke="#8A9099" stroke-width="1.4" marker-end="url(#a)"/>
+
+  <!-- GATE -->
+  <rect x="60" y="742" width="376" height="44" rx="6" fill="#FBE9E9" stroke="#A54A4A" stroke-width="1.6"/>
+  <text x="248" y="761" text-anchor="middle" font-size="12" font-weight="700" fill="#14161A">Groundedness gate</text>
+  <text x="248" y="775" text-anchor="middle" font-size="8.5" fill="#6A7079">if it cannot be cited, it is not asserted</text>
+
+  <path d="M160 786 L160 812" stroke="#8A9099" stroke-width="1.4" marker-end="url(#a)"/>
+  <path d="M340 786 L340 812" stroke="#8A9099" stroke-width="1.4" marker-end="url(#a)"/>
+
+  <rect x="60" y="814" width="196" height="44" rx="6" fill="#E9F2EC" stroke="#4A7A5C" stroke-width="1.3"/>
+  <text x="158" y="833" text-anchor="middle" font-size="11" font-weight="600" fill="#14161A">Complete</text>
+  <text x="158" y="847" text-anchor="middle" font-size="8.5" fill="#6A7079">to the analyst queue</text>
+
+  <rect x="270" y="814" width="196" height="44" rx="6" fill="#FDF0E3" stroke="#B57A3C" stroke-width="1.3"/>
+  <text x="368" y="833" text-anchor="middle" font-size="11" font-weight="600" fill="#14161A">Escalate</text>
+  <text x="368" y="847" text-anchor="middle" font-size="8.5" fill="#6A7079">low confidence · budget spent · no clause</text>
+
+  <text x="263" y="880" text-anchor="middle" font-size="9.5" fill="#A54A4A" font-style="italic">A case never fails silently — it completes, completes-with-gaps, or escalates, and always says which.</text>
+
+  <!-- STATE PANEL -->
+  <rect x="650" y="144" width="250" height="330" rx="8" fill="#EFF1F4" stroke="#5A5A78" stroke-width="1.2"/>
+  <text x="775" y="165" text-anchor="middle" font-size="11.5" font-weight="700" fill="#14161A">CaseInvestigationState</text>
+  <text x="775" y="179" text-anchor="middle" font-size="8.5" fill="#6A7079">flows through every node above</text>
+  <line x1="666" y1="188" x2="884" y2="188" stroke="#C4C9D0"/>
+  <g font-size="9" fill="#14161A">
+    <text x="666" y="205" font-weight="700" fill="#4A6FA5">immutable for the run</text>
+    <text x="672" y="219">case_id · account_refs (tokenised)</text>
+    <text x="672" y="232">signals[] · facts</text>
+    <text x="672" y="245">principal — carried into every tool call</text>
+
+    <text x="666" y="268" font-weight="700" fill="#4A7A5C">accumulates, append-only</text>
+    <text x="672" y="282">findings[]  ← one per investigator</text>
+    <text x="672" y="295">conflicts[]</text>
+    <text x="672" y="308">citations[]</text>
+
+    <text x="666" y="331" font-weight="700" fill="#B57A3C">control</text>
+    <text x="672" y="345">step_count · budget · round · status</text>
+
+    <text x="666" y="368" font-weight="700" fill="#6D4E9C">output</text>
+    <text x="672" y="382">recommendation · narrative</text>
+    <text x="672" y="395">confidence · escalation_reason</text>
+  </g>
+  <line x1="666" y1="410" x2="884" y2="410" stroke="#C4C9D0"/>
+  <text x="666" y="428" font-size="9" font-weight="700" fill="#A54A4A">never in state</text>
+  <text x="672" y="442" font-size="9" fill="#14161A">names · PAN · phone · address</text>
+  <text x="672" y="456" font-size="8.5" fill="#6A7079">state is checkpointed and traced —</text>
+  <text x="672" y="467" font-size="8.5" fill="#6A7079">anything here reaches the trace store</text>
+
+  <!-- BUDGET PANEL -->
+  <rect x="650" y="492" width="250" height="176" rx="8" fill="#FDF0E3" stroke="#B57A3C" stroke-width="1.2"/>
+  <text x="775" y="513" text-anchor="middle" font-size="11.5" font-weight="700" fill="#14161A">Budgets &amp; guards</text>
+  <line x1="666" y1="522" x2="884" y2="522" stroke="#E0CDB4"/>
+  <g font-size="9" fill="#14161A">
+    <text x="672" y="540">supervisor rounds ≤ 2</text>
+    <text x="672" y="558">tool calls ≤ 6 per investigator</text>
+    <text x="672" y="576">tool calls ≤ 30 per case</text>
+    <text x="672" y="594">wall clock ≤ 90 s</text>
+    <text x="672" y="612">cost ceiling, logged every run</text>
+    <text x="672" y="632" font-weight="700" fill="#B57A3C">cycle guard</text>
+    <text x="672" y="646" font-size="8.5" fill="#6A7079">no investigator twice with the</text>
+    <text x="672" y="657" font-size="8.5" fill="#6A7079">same input hash</text>
+  </g>
+
+  <!-- INTERRUPT PANEL -->
+  <rect x="650" y="686" width="250" height="172" rx="8" fill="#FBE9E9" stroke="#A54A4A" stroke-width="1.2"/>
+  <text x="775" y="707" text-anchor="middle" font-size="11.5" font-weight="700" fill="#14161A">Human-in-the-loop</text>
+  <text x="775" y="721" text-anchor="middle" font-size="8.5" fill="#6A7079">graph interrupts and checkpoints</text>
+  <line x1="666" y1="730" x2="884" y2="730" stroke="#EBC9C9"/>
+  <g font-size="9" fill="#14161A">
+    <text x="672" y="748">recommendation above analyst authority</text>
+    <text x="672" y="766">confidence is low</text>
+    <text x="672" y="784">budget was exhausted</text>
+    <text x="672" y="802">investigators conflicted and the</text>
+    <text x="682" y="814">arbitration itself was uncertain</text>
+  </g>
+  <text x="672" y="838" font-size="8.5" fill="#6A7079">Resuming continues from the checkpoint,</text>
+  <text x="672" y="850" font-size="8.5" fill="#6A7079">not from the beginning.</text>
+
+  <!-- FOOTNOTE -->
+  <line x1="60" y1="906" x2="900" y2="906" stroke="#D8DCE2"/>
+  <text x="60" y="928" font-size="10.5" font-weight="700" fill="#14161A">Every finding has the same shape — which is what makes arbitration mechanical and evaluation uniform</text>
+  <g font-size="9" fill="#14161A">
+    <text x="60" y="948">investigator · conclusion (one sentence) · evidence[] · confidence · supports: deterioration | benign | inconclusive · contradicts[]</text>
+    <text x="60" y="966">EvidenceItem: source · field · value · as_of · tool_call_id</text>
+  </g>
+  <text x="60" y="988" font-size="9.5" fill="#A54A4A">A finding with no evidence is rejected by validation — not by an instruction in a prompt.</text>
+  <text x="60" y="1012" font-size="9.5" fill="#6A7079" font-style="italic">Tools bound what is possible. Prompts only bias what is likely. No tool in this graph can act outside our own systems.</text>
+</svg>

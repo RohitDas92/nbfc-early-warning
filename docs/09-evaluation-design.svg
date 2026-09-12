@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 1000" width="940" height="1000" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <rect width="940" height="1000" fill="#FBFBFC"/>
+  <defs>
+    <marker id="e" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#8A9099"/></marker>
+    <marker id="eg" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#4A7A5C"/></marker>
+    <marker id="er" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#A54A4A"/></marker>
+  </defs>
+
+  <text x="470" y="30" text-anchor="middle" font-size="17" font-weight="700" fill="#14161A">Evaluation Design</text>
+  <text x="470" y="49" text-anchor="middle" font-size="11" fill="#6A7079">Same book, same date, two arms. The gap between them is what the agents are worth.</text>
+
+  <!-- DATASETS -->
+  <text x="60" y="76" font-size="11" font-weight="700" fill="#4A7A5C" letter-spacing="0.6">DATASETS</text>
+  <g fill="#E9F2EC" stroke="#4A7A5C" stroke-width="1.2">
+    <rect x="60"  y="84" width="200" height="58" rx="6"/>
+    <rect x="272" y="84" width="200" height="58" rx="6"/>
+    <rect x="484" y="84" width="200" height="58" rx="6"/>
+    <rect x="696" y="84" width="204" height="58" rx="6"/>
+  </g>
+  <g text-anchor="middle" font-size="11" font-weight="600" fill="#14161A">
+    <text x="160" y="104">Book A — dev</text>
+    <text x="372" y="104">Book B — held out</text>
+    <text x="584" y="104">eval.labels</text>
+    <text x="798" y="104">Fixtures</text>
+  </g>
+  <g text-anchor="middle" font-size="8.5" fill="#6A7079">
+    <text x="160" y="119">seed 20260910 · loaded</text><text x="160" y="131">tune freely</text>
+    <text x="372" y="119">different seed</text>
+    <text x="584" y="119">pattern · onset · reached_npa</text><text x="584" y="131">separate schema</text>
+    <text x="798" y="119">~20 recorded runs</text><text x="798" y="131">makes CI free and deterministic</text>
+  </g>
+  <text x="372" y="131" text-anchor="middle" font-size="8.5" font-weight="700" fill="#A54A4A">DO NOT OPEN UNTIL W4</text>
+
+  <path d="M160 142 L160 176" stroke="#8A9099" stroke-width="1.4" marker-end="url(#e)"/>
+  <path d="M584 142 L584 560" stroke="#4A7A5C" stroke-width="1.2" stroke-dasharray="4 3" fill="none"/>
+  <text x="596" y="300" font-size="9" fill="#4A7A5C">answer key — joined only at Layer 2</text>
+
+  <!-- TWO ARMS -->
+  <text x="60" y="196" font-size="11" font-weight="700" fill="#B57A3C" letter-spacing="0.6">TWO ARMS · same portfolio, same as-of date</text>
+
+  <rect x="60" y="204" width="230" height="120" rx="8" fill="#FDF0E3" stroke="#B57A3C" stroke-width="1.5"/>
+  <text x="175" y="226" text-anchor="middle" font-size="12.5" font-weight="700" fill="#14161A">Arm A — Rules only</text>
+  <text x="175" y="244" text-anchor="middle" font-size="9" fill="#6A7079">classification · signal engine</text>
+  <text x="175" y="257" text-anchor="middle" font-size="9" fill="#6A7079">suppression · case routing</text>
+  <text x="175" y="277" text-anchor="middle" font-size="9" fill="#6A7079">no investigation, no recommendation</text>
+  <text x="175" y="300" text-anchor="middle" font-size="9.5" font-weight="700" fill="#B57A3C">THE CONTROL</text>
+  <text x="175" y="314" text-anchor="middle" font-size="8.5" fill="#6A7079">build this one first — it's the simpler half</text>
+
+  <rect x="316" y="204" width="230" height="120" rx="8" fill="#F0E9F7" stroke="#6D4E9C" stroke-width="1.5"/>
+  <text x="431" y="226" text-anchor="middle" font-size="12.5" font-weight="700" fill="#14161A">Arm B — Rules + Agents</text>
+  <text x="431" y="244" text-anchor="middle" font-size="9" fill="#6A7079">everything in Arm A, plus</text>
+  <text x="431" y="257" text-anchor="middle" font-size="9" fill="#6A7079">triage · five investigators</text>
+  <text x="431" y="270" text-anchor="middle" font-size="9" fill="#6A7079">arbitration · policy · narrative</text>
+  <text x="431" y="300" text-anchor="middle" font-size="9.5" font-weight="700" fill="#6D4E9C">THE TREATMENT</text>
+
+  <path d="M175 324 L175 350" stroke="#8A9099" stroke-width="1.4" marker-end="url(#e)"/>
+  <path d="M431 324 L431 350" stroke="#8A9099" stroke-width="1.4" marker-end="url(#e)"/>
+
+  <rect x="60" y="352" width="486" height="38" rx="6" fill="#EDEDF2" stroke="#5A5A78" stroke-width="1.2"/>
+  <text x="303" y="376" text-anchor="middle" font-size="11" font-weight="600" fill="#14161A">Cases + traces from each arm</text>
+  <path d="M303 390 L303 414" stroke="#8A9099" stroke-width="1.4" marker-end="url(#e)"/>
+
+  <!-- THE DELTA CALLOUT -->
+  <rect x="576" y="204" width="324" height="120" rx="8" fill="#FFF8E6" stroke="#B57A3C" stroke-width="1.8"/>
+  <text x="738" y="228" text-anchor="middle" font-size="12.5" font-weight="700" fill="#14161A">Arm B − Arm A = what the agents added</text>
+  <line x1="596" y1="238" x2="880" y2="238" stroke="#E0CDB4"/>
+  <text x="596" y="258" font-size="9.5" fill="#14161A">Without the control arm, every number you quote</text>
+  <text x="596" y="272" font-size="9.5" fill="#14161A">is unanchored — and the honest answer to</text>
+  <text x="596" y="286" font-size="9.5" fill="#14161A">“how do you know the agents helped?” is</text>
+  <text x="596" y="300" font-size="9.5" font-weight="700" fill="#A54A4A">“I don't.”</text>
+  <text x="596" y="316" font-size="8.5" fill="#6A7079" font-style="italic">Almost nobody builds this. It is the strongest number you will have.</text>
+
+  <!-- LAYERS -->
+  <text x="60" y="434" font-size="11" font-weight="700" fill="#6D4E9C" letter-spacing="0.6">THREE SCORING LAYERS · build in this order</text>
+
+  <rect x="60" y="442" width="486" height="96" rx="8" fill="#EDEDF2" stroke="#5A5A78" stroke-width="1.4"/>
+  <text x="76" y="463" font-size="12" font-weight="700" fill="#14161A">Layer 1 — Deterministic checks</text>
+  <text x="524" y="463" text-anchor="end" font-size="9" font-weight="700" fill="#4A7A5C">EVERY CASE · FREE · GATES CI</text>
+  <g font-size="9" fill="#14161A">
+    <text x="76" y="482">citation_present</text><text x="240" y="482">citation_resolvable</text><text x="404" y="482">budget_respected</text>
+    <text x="76" y="498">action_permitted</text><text x="240" y="498">terminated_cleanly</text><text x="404" y="498">no_egress_violation</text>
+  </g>
+  <text x="76" y="520" font-size="8.5" fill="#6A7079">No model involved. Catches most regressions, costs nothing, and is a valid</text>
+  <text x="76" y="532" font-size="8.5" fill="#6A7079">predicate for <tspan font-family="ui-monospace, monospace">git bisect</tspan> when a number moves and you don't know which commit did it.</text>
+  <path d="M303 538 L303 558" stroke="#8A9099" stroke-width="1.4" marker-end="url(#e)"/>
+
+  <rect x="60" y="560" width="486" height="128" rx="8" fill="#E9F2EC" stroke="#4A7A5C" stroke-width="1.4"/>
+  <text x="76" y="581" font-size="12" font-weight="700" fill="#14161A">Layer 2 — Labelled golden set</text>
+  <text x="524" y="581" text-anchor="end" font-size="9" font-weight="700" fill="#4A7A5C">JOINED TO eval.labels</text>
+  <g font-size="9.5" fill="#14161A">
+    <text x="76" y="602" font-weight="700">Early detection rate</text>
+    <text x="76" y="615" font-size="8.5" fill="#6A7079">of loans that reached NPA, share with a case opened ≥90 days before — reported with and without random_default</text>
+    <text x="76" y="634" font-weight="700">Confounder false-positive rate</text>
+    <text x="76" y="647" font-size="8.5" fill="#A54A4A">of the 200 planted confounders, share that got an “act” recommendation — the sharpest number you have</text>
+    <text x="76" y="666" font-weight="700">Precision · Cohort discovery · Suppression ratio</text>
+    <text x="76" y="679" font-size="8.5" fill="#6A7079">did it find all four planted institutions, and how many days after the event?</text>
+  </g>
+  <path d="M303 688 L303 708" stroke="#8A9099" stroke-width="1.4" marker-end="url(#e)"/>
+
+  <rect x="60" y="710" width="486" height="86" rx="8" fill="#F0E9F7" stroke="#6D4E9C" stroke-width="1.4"/>
+  <text x="76" y="731" font-size="12" font-weight="700" fill="#14161A">Layer 3 — LLM as judge</text>
+  <text x="524" y="731" text-anchor="end" font-size="9" font-weight="700" fill="#6D4E9C">SAMPLED · NARROW</text>
+  <text x="76" y="750" font-size="9" fill="#14161A">Only what the first two cannot reach: narrative coherence, defensibility of reasoning.</text>
+  <rect x="76" y="758" width="454" height="30" rx="5" fill="#FBE9E9" stroke="#A54A4A" stroke-width="1.2"/>
+  <text x="303" y="777" text-anchor="middle" font-size="9.5" font-weight="700" fill="#14161A">Validate the judge first: score 30 cases yourself, compare. Below ~80% agreement its numbers are decoration.</text>
+
+  <!-- RUN RECORD -->
+  <rect x="576" y="442" width="324" height="180" rx="8" fill="#E8EEF7" stroke="#4A6FA5" stroke-width="1.4"/>
+  <text x="738" y="464" text-anchor="middle" font-size="12" font-weight="700" fill="#14161A">eval.run — the run record</text>
+  <line x1="596" y1="473" x2="880" y2="473" stroke="#C6D2E4"/>
+  <g font-size="9" fill="#14161A">
+    <text x="596" y="492">git_sha</text>
+    <text x="596" y="509">dataset_seed · as_of_date · arm</text>
+    <text x="596" y="526">model versions</text>
+    <text x="596" y="543">prompt versions</text>
+    <text x="596" y="560">all metrics, with numerator</text>
+    <text x="606" y="572">and denominator</text>
+  </g>
+  <text x="596" y="596" font-size="8.5" fill="#6A7079">A metric without the run record behind it</text>
+  <text x="596" y="608" font-size="8.5" fill="#6A7079">is an anecdote, not a result.</text>
+
+  <!-- CI GATE -->
+  <rect x="576" y="640" width="324" height="156" rx="8" fill="#FBE9E9" stroke="#A54A4A" stroke-width="1.5"/>
+  <text x="738" y="662" text-anchor="middle" font-size="12" font-weight="700" fill="#14161A">CI gate — on every pull request</text>
+  <line x1="596" y1="671" x2="880" y2="671" stroke="#EBC9C9"/>
+  <g font-size="9" fill="#14161A">
+    <text x="596" y="690">Runs on the 20-case fixture set</text>
+    <text x="596" y="707">All Layer 1 checks must pass</text>
+    <text x="596" y="724">Early detection may not fall &gt; 3 pts</text>
+    <text x="596" y="741">Confounder FP may not rise &gt; 3 pts</text>
+  </g>
+  <text x="596" y="765" font-size="8.5" fill="#6A7079">Deterministic and free, because it runs on</text>
+  <text x="596" y="777" font-size="8.5" fill="#6A7079">recorded responses rather than live models.</text>
+
+  <!-- FOOTER -->
+  <line x1="60" y1="822" x2="900" y2="822" stroke="#D8DCE2"/>
+  <text x="60" y="844" font-size="11" font-weight="700" fill="#A54A4A">Six ways to fool yourself</text>
+  <g font-size="9" fill="#14161A">
+    <text x="60" y="864">Tuning on the held-out book — one look and Book B is just Book A with extra steps</text>
+    <text x="60" y="880">Reporting recall without precision — flag everything and detection hits 100%</text>
+    <text x="60" y="896">Excluding the hard cases — random_default belongs in the denominator; it is what keeps a perfect score impossible</text>
+    <text x="60" y="912">An unvalidated judge — numbers with no known relationship to human judgement</text>
+    <text x="60" y="928">A single number with no control arm — “87% detection” means nothing without the rules-only figure beside it</text>
+    <text x="60" y="944">Scoring only final answers — a right answer reached by a broken path breaks tomorrow</text>
+  </g>
+  <text x="60" y="972" font-size="9.5" fill="#6A7079" font-style="italic">If you cannot say how a run would be scored, the system design is not finished.</text>
+</svg>

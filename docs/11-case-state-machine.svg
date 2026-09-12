@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 760" width="940" height="760" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <rect width="940" height="760" fill="#FBFBFC"/>
+  <defs>
+    <marker id="s" markerWidth="10" markerHeight="10" refX="8" refY="3.2" orient="auto"><path d="M0,0 L0,6.4 L8,3.2 z" fill="#5A5A78"/></marker>
+    <marker id="sr" markerWidth="10" markerHeight="10" refX="8" refY="3.2" orient="auto"><path d="M0,0 L0,6.4 L8,3.2 z" fill="#A54A4A"/></marker>
+    <marker id="sg" markerWidth="10" markerHeight="10" refX="8" refY="3.2" orient="auto"><path d="M0,0 L0,6.4 L8,3.2 z" fill="#4A7A5C"/></marker>
+  </defs>
+
+  <text x="470" y="30" text-anchor="middle" font-size="17" font-weight="700" fill="#14161A">The Case State Machine</text>
+  <text x="470" y="49" text-anchor="middle" font-size="11" fill="#6A7079">Six states. Every arrow is an event. Anything not drawn here cannot happen.</text>
+
+  <!-- start dot -->
+  <circle cx="60" cy="133" r="7" fill="#5A5A78"/>
+  <path d="M67 133 L136 133" stroke="#5A5A78" stroke-width="1.5" marker-end="url(#s)"/>
+  <text x="102" y="124" text-anchor="middle" font-size="8.5" fill="#5A5A78">signal fires,</text>
+  <text x="102" y="152" text-anchor="middle" font-size="8.5" fill="#5A5A78">no open case</text>
+
+  <!-- STATES -->
+  <g stroke-width="1.6">
+    <rect x="140" y="106" width="150" height="54" rx="27" fill="#E8EEF7" stroke="#4A6FA5"/>
+    <rect x="400" y="106" width="170" height="54" rx="27" fill="#F0E9F7" stroke="#6D4E9C"/>
+    <rect x="392" y="292" width="186" height="54" rx="27" fill="#E9F2EC" stroke="#4A7A5C"/>
+    <rect x="120" y="292" width="150" height="54" rx="27" fill="#EDEDF2" stroke="#5A5A78"/>
+    <rect x="700" y="292" width="150" height="54" rx="27" fill="#FDF0E3" stroke="#B57A3C"/>
+    <rect x="392" y="500" width="186" height="54" rx="27" fill="#FBE9E9" stroke="#A54A4A"/>
+  </g>
+  <g text-anchor="middle" font-size="13" font-weight="700" fill="#14161A">
+    <text x="215" y="132">open</text>
+    <text x="485" y="132">investigating</text>
+    <text x="485" y="318">awaiting_review</text>
+    <text x="195" y="318">snoozed</text>
+    <text x="775" y="318">escalated</text>
+    <text x="485" y="526">closed</text>
+  </g>
+  <g text-anchor="middle" font-size="8.5" fill="#6A7079">
+    <text x="215" y="147">created, not yet worked</text>
+    <text x="485" y="147">agent run in progress</text>
+    <text x="485" y="333">in the analyst queue</text>
+    <text x="195" y="333">deferred to a date</text>
+    <text x="775" y="333">needs higher authority</text>
+    <text x="485" y="541">done — with an outcome</text>
+  </g>
+
+  <!-- open -> investigating -->
+  <path d="M290 133 L396 133" stroke="#5A5A78" stroke-width="1.5" marker-end="url(#s)"/>
+  <text x="343" y="126" text-anchor="middle" font-size="9" fill="#14161A">investigation</text>
+  <text x="343" y="150" text-anchor="middle" font-size="9" fill="#14161A">started</text>
+
+  <!-- investigating -> awaiting_review -->
+  <path d="M485 160 L485 288" stroke="#5A5A78" stroke-width="1.5" marker-end="url(#s)"/>
+  <text x="495" y="228" font-size="9" fill="#14161A">investigation completed</text>
+
+  <!-- investigating -> escalated -->
+  <path d="M570 140 L775 140 L775 288" stroke="#B57A3C" stroke-width="1.5" fill="none" marker-end="url(#s)"/>
+  <text x="672" y="132" text-anchor="middle" font-size="9" fill="#B57A3C">budget spent · timeout</text>
+
+  <!-- awaiting_review -> snoozed -->
+  <path d="M392 308 L274 308" stroke="#5A5A78" stroke-width="1.5" marker-end="url(#s)"/>
+  <text x="333" y="301" text-anchor="middle" font-size="9" fill="#14161A">snooze</text>
+
+  <!-- snoozed -> awaiting_review -->
+  <path d="M274 332 L388 332" stroke="#4A7A5C" stroke-width="1.5" marker-end="url(#sg)"/>
+  <text x="331" y="350" text-anchor="middle" font-size="9" fill="#4A7A5C">expires, or an</text>
+  <text x="331" y="361" text-anchor="middle" font-size="9" fill="#4A7A5C">outranking signal wakes it</text>
+
+  <!-- awaiting_review -> escalated -->
+  <path d="M578 312 L696 312" stroke="#5A5A78" stroke-width="1.5" marker-end="url(#s)"/>
+  <text x="637" y="305" text-anchor="middle" font-size="9" fill="#14161A">above authority</text>
+
+  <!-- awaiting_review -> closed -->
+  <path d="M470 346 L470 496" stroke="#5A5A78" stroke-width="1.5" marker-end="url(#s)"/>
+  <text x="368" y="410" font-size="9" fill="#14161A">close(outcome)</text>
+  <text x="352" y="426" font-size="8.5" fill="#6A7079">or auto-close after</text>
+  <text x="352" y="437" font-size="8.5" fill="#6A7079">90 quiet days</text>
+
+  <!-- escalated -> closed -->
+  <path d="M775 346 L775 527 L582 527" stroke="#5A5A78" stroke-width="1.5" fill="none" marker-end="url(#s)"/>
+  <text x="700" y="519" text-anchor="middle" font-size="9" fill="#14161A">close(outcome)</text>
+
+  <!-- closed -> awaiting_review (reopen) -->
+  <path d="M500 496 L500 350" stroke="#A54A4A" stroke-width="1.3" stroke-dasharray="4 3" fill="none" marker-end="url(#sr)"/>
+  <text x="512" y="420" font-size="9" fill="#A54A4A">reopen</text>
+  <text x="512" y="433" font-size="8.5" fill="#A54A4A">≤ 14 days only</text>
+
+  <!-- join self-loop on awaiting_review -->
+  <path d="M545 292 C 560 250, 620 250, 620 292" stroke="#4A7A5C" stroke-width="1.4" fill="none" marker-end="url(#sg)"/>
+  <text x="628" y="262" font-size="9" font-weight="700" fill="#4A7A5C">signal joins</text>
+  <text x="628" y="274" font-size="8.5" fill="#4A7A5C">evidence appended, state unchanged</text>
+
+  <!-- NOTES -->
+  <line x1="60" y1="588" x2="880" y2="588" stroke="#D8DCE2"/>
+
+  <text x="60" y="610" font-size="11" font-weight="700" fill="#14161A">Guards — these make certain moves impossible</text>
+  <g font-size="9.5" fill="#14161A">
+    <text x="60" y="630">Cannot close without an outcome — enforced by a database constraint, not a convention</text>
+    <text x="60" y="647">Cannot reopen after 14 days — a later signal creates a NEW case, linked to the old one as predecessor</text>
+    <text x="60" y="664">Cannot start an investigation on a closed case</text>
+    <text x="60" y="681">One open case per account at a time — further signals join it rather than opening another</text>
+  </g>
+
+  <rect x="60" y="698" width="820" height="42" rx="6" fill="#FFF8E6" stroke="#B57A3C" stroke-width="1.3"/>
+  <text x="76" y="716" font-size="9.5" font-weight="700" fill="#14161A">Why new-case-not-reopen:</text>
+  <text x="240" y="716" font-size="9.5" fill="#14161A">your evaluation needs one clean outcome per episode. If a cured account relapses back into the</text>
+  <text x="76" y="731" font-size="9.5" fill="#14161A">same case, “did the intervention work?” becomes unanswerable — one outcome would be spanning two different stories.</text>
+</svg>
