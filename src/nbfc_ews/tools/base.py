@@ -2,8 +2,6 @@ from dataclasses import dataclass, field
 from datetime import date
 from typing import Any, Protocol
 
-from nbfc_ews.domain.principal import Principal
-
 
 @dataclass(frozen=True)
 class ToolResult:
@@ -13,9 +11,9 @@ class ToolResult:
     omitted: int = 0
     reason: str | None = None
 
-def success(data: list[dict], as_of: date, omitted: int = 0) -> ToolResult:
+def success(data: list[dict], as_of: date | None, omitted: int = 0) -> ToolResult:
     """A Tool answered the question."""
-    return ToolResult(ok = True, data = data, as_of= as_of, omitted=omitted)
+    return ToolResult(ok = True, data = data, as_of= as_of , omitted=omitted)
 
 def failure(reason: str) -> ToolResult:
     """A tool could not answer, and this is the reason."""
@@ -24,10 +22,11 @@ def failure(reason: str) -> ToolResult:
 class Tool(Protocol):
     """The shape every tool must have."""
 
-    name: str
-    description: str
+    @property
+    def name(self) -> str: ...
 
-    def __call__(self, conn, principal: Principal, **params) -> ToolResult:
-        ...
-        
+    @property
+    def description(self) -> str: ...
+
+    def __call__(self, *args: Any, **kwargs: Any) -> ToolResult: ...
 
