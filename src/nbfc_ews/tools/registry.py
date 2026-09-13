@@ -8,6 +8,7 @@ _AGENT_TOOLS: dict[str, set[str]] = {
     "context": set(),
     "cohort": set(),
     "policy": set(),
+    "bureau": {"get_bureau_history"}
 }
 
 def register(tool: Tool) -> None:

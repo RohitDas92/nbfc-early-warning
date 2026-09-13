@@ -1,4 +1,5 @@
 from datetime import date
+from itertools import pairwise
 
 import pytest
 
@@ -51,7 +52,7 @@ def test_no_gaps_in_the_month_series(conn, account):
         r = TOOL(c, ALL, account_id=account, as_of=AS_OF, months=240)
 
     months = [date.fromisoformat(d["month"]) for d in r.data]
-    for newer, older in zip(months, months[1:]):
+    for newer, older in pairwise(months):
         gap = (newer.year - older.year) * 12 + (newer.month - older.month)
         assert gap == 1, f"gap between {older} and {newer}"
 
