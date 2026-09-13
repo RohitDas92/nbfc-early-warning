@@ -35,8 +35,6 @@ def test_no_scope_sees_nothing(conn):
     with session(conn, NOBODY) as c:
         assert _loan_count(c) == 0
 
-
 def test_app_rw_cannot_read_base_party_table(conn):
-    with session(conn, ANALYST) as c:
-        with pytest.raises(psycopg.errors.InsufficientPrivilege):
-            c.execute("select * from party limit 1")
+    with session(conn, ANALYST) as c, pytest.raises(psycopg.errors.InsufficientPrivilege):
+        c.execute("select * from party limit 1")

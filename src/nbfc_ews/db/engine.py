@@ -1,5 +1,6 @@
-import psycopg
 from contextlib import contextmanager
+
+import psycopg
 
 from nbfc_ews.config import DATABASE_URL
 from nbfc_ews.domain.principal import Principal
