@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from datetime import date
+from typing import Any
 
 from nbfc_ews.domain.principal import Principal
 from nbfc_ews.tools.base import ToolResult, failure, success
@@ -71,7 +72,19 @@ class GetPaymentBehaviour:
     " paid_ratio is null during the moratorium, when no EMI is due."
     " Use this to judge whether repayment is deteriorating."
     )
-    
+
+    @property
+    def parameters(self) -> dict[str, Any]:
+        return{
+            "type": "object",
+            "properties":{
+                "account_id": {"type": "string"},
+                "months": {"type": "integer", "default": 12},
+            },
+            "required": ["account_id"]
+        }
+
+
     def __call__(
             self, 
             conn,

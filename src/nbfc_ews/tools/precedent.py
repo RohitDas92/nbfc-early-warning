@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from datetime import date
+from typing import Any
 
 from psycopg.rows import dict_row
 
@@ -76,6 +77,17 @@ class FindSimilarAlerts:
         " An empty results means no comparable precedent, not that nothing works."
     )
 
+    @property
+    def parameters(self) -> dict[str, Any]:
+        return {
+            "type": "object",
+            "properties": {
+                "account_id": {"type": "string"},
+                "window_months": {"type": "integer", "default": 3},
+            },
+            "required": ["account_id"],
+        }
+    
     def __call__(
             self,
             conn,

@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from datetime import date
+from typing import Any
 
 from psycopg.rows import dict_row
 
@@ -73,6 +74,17 @@ class GetBureauHistory:
         " Pulls are quarterly portfolio monitoring; this tool cannot request a new one"
     )
 
+    @property
+    def parameters(self) -> dict[str, Any]:
+        return {
+            "type": "object",
+            "properties": {
+                "account_id": {"type": "string"},
+                "limit": {"type": "integer", "default": 8},
+            },
+            "required": ["account_id"],
+        }
+    
     def __call__(
             self,
             conn,

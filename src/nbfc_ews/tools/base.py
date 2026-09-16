@@ -11,6 +11,7 @@ class ToolResult:
     omitted: int = 0
     reason: str | None = None
 
+
 def success(data: list[dict], as_of: date | None, omitted: int = 0) -> ToolResult:
     """A Tool answered the question."""
     return ToolResult(ok = True, data = data, as_of= as_of , omitted=omitted)
@@ -27,6 +28,9 @@ class Tool(Protocol):
 
     @property
     def description(self) -> str: ...
+
+    @property
+    def parameters(self) -> dict[str, Any]: ...
 
     def __call__(self, *args: Any, **kwargs: Any) -> ToolResult: ...
 
