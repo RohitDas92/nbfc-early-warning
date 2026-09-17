@@ -41,7 +41,7 @@ def run(conn, ctx, script, max_turns=6):
 
 def test_the_agent_sees_only_its_own_tools():
     names = {spec.name for spec in specs_for("repayment")}
-    assert names == {"get_payment_behaviour", "find_similar_alerts"}
+    assert names == {"get_payment_behaviour", "find_similar_alerts", "get_contact_history"}
     assert specs_for("marketing") == []
 
 

@@ -3,7 +3,7 @@ from nbfc_ews.tools.base import Tool
 _REGISTRY: dict[str, Tool] = {}
 
 _AGENT_TOOLS: dict[str, set[str]] = {
-    "repayment": {"get_payment_behaviour","find_similar_alerts"},
+    "repayment": {"get_payment_behaviour","find_similar_alerts","get_contact_history",},
     "external": set(),
     "context": set(),
     "cohort": set(),
