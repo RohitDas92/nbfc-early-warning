@@ -3,3 +3,4 @@ psycopg[binary]
 pytest
 alembic
 python-dotenv
+pyyaml
