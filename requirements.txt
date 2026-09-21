@@ -4,3 +4,5 @@ pytest
 alembic
 python-dotenv
 pyyaml
+tiktoken
+docling

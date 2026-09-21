@@ -13,8 +13,12 @@ data/cache/
 resources/*
 !resources/README.md
 
-# local developer shortcuts - machine specific
-scripts/
+# the policy corpus is source; what's built from it is not
+!resources/policy/
+resources/policy/_build/
+resources/policy/pdf/
+resources/policy/rbi-source/*.pdf
+resources/policy/rbi-source/_text/
 
 *.egg-info/
 build/
