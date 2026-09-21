@@ -5,7 +5,23 @@ requires-python = ">=3.11"
 dependencies = [
     "psycopg[binary]>=3.2",
     "alembic>=1.13",
+    "pydantic>=2.7,<3",
+    "python-dotenv",
+    "pyyaml",
+    "tiktoken",
 ]
+
+[project.optional-dependencies]
+pdf = ["docling"]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "ruff>=0.6",
+    "mypy",
+    "pre-commit>=3.7",
+    "types-PyYAML",
+]
+
 [tool.pytest.ini_options]
 pythonpath = ["src"]
 testpaths = ["tests"]
