@@ -17,7 +17,7 @@ select s.bucket, s.is_in_moratorium
 from loan l
 join loan_month_state s on s.loan_id = l.id
 where l.loan_account_no = %(account_id)s
-  and s.as_of_month = date_trunc('month', %(as_of)s::date)
+  and s.as_of_month = (date_trunc('month', %(as_of)s::date) - interval '1 month')::date
 """
 
 _PRECEDENT_SQL = """
@@ -35,7 +35,7 @@ with acted as (
       and s.is_in_moratorium = %(in_moratorium)s
       and date_trunc('month', i.actioned_at)::date
             + make_interval(months => %(window_months)s)
-          <= date_trunc('month', %(as_of)s::date)
+          <  date_trunc('month', %(as_of)s::date)
 ),
 outcome as (
     select

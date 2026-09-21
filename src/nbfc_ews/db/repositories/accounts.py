@@ -1,5 +1,10 @@
 from nbfc_ews.domain.signals import AccountFacts
 
+# Business-date convention, shared with the tools and the agents:
+# as_of is the morning a run happens, always the first of a month. Nothing
+# dated on or after it is visible. The month that has just ended is
+# (as_of - 1 month). Every window below ends at < as_of.
+
 _FACTS_SQL = """
 select
     l.id,
@@ -12,10 +17,10 @@ select
 from loan l
 join loan_month_state cur
   on cur.loan_id = l.id
- and cur.as_of_month = %(as_of)s
+ and cur.as_of_month = (%(as_of)s::date - interval '1 month')::date
 left join loan_month_state prev
   on prev.loan_id = l.id
- and prev.as_of_month = (%(as_of)s::date - interval '1 month')::date
+ and prev.as_of_month = (%(as_of)s::date - interval '2 months')::date
 """
 
 _BOUNCE_SQL = """
@@ -26,7 +31,7 @@ select
 from presentation p
 where p.status = 'bounce'
   and p.presentation_date >= (%(as_of)s::date - interval '3 months')
-  and p.presentation_date <  (%(as_of)s::date + interval '1 month')
+  and p.presentation_date <  %(as_of)s
 group by p.loan_id
 """
 
@@ -38,8 +43,8 @@ with monthly as (
         min(extract(day from p.payment_date))::int as pay_day,
         sum(p.amount) as paid
     from payment p
-    where p.payment_date >= (%(as_of)s::date - interval '2 months')
-      and p.payment_date <  (%(as_of)s::date + interval '1 month')
+    where p.payment_date >= (%(as_of)s::date - interval '3 months')
+      and p.payment_date <  %(as_of)s
     group by 1, 2
 )
 select
@@ -56,8 +61,8 @@ with latest as (
     select distinct on (b.party_id)
         b.party_id, b.score, b.as_of_date, b.enquiries_last_60d
     from bureau_snapshot b
-    where b.as_of_date <= %(as_of)s
-      and b.as_of_date >  (%(as_of)s::date - interval '1 month')
+    where b.as_of_date <  %(as_of)s
+      and b.as_of_date >= (%(as_of)s::date - interval '1 month')
     order by b.party_id, b.as_of_date desc
 ),
 previous as (
@@ -97,7 +102,7 @@ select
 from contact_attempt c
 where c.outcome <> 'connected'
   and c.attempt_date >= (%(as_of)s::date - interval '60 days')
-  and c.attempt_date <  (%(as_of)s::date + interval '1 month')
+  and c.attempt_date <  %(as_of)s
 group by c.loan_id
 """
 
@@ -111,8 +116,8 @@ join loan l on l.id = lms.loan_id
 where lms.is_in_moratorium
   and l.interest_servicing_required
   and lms.overdue_interest > 0
-  and lms.as_of_month >  (%(as_of)s::date - interval '3 months')
-  and lms.as_of_month <= %(as_of)s
+  and lms.as_of_month >= (%(as_of)s::date - interval '3 months')
+  and lms.as_of_month <  %(as_of)s
 group by lms.loan_id
 """
 
@@ -121,8 +126,8 @@ select distinct on (a.loan_id)
     a.loan_id,
     a.event_type
 from adverse_event a
-where a.event_date <= %(as_of)s
-  and a.event_date >  (%(as_of)s::date - interval '12 months')
+where a.event_date <  %(as_of)s
+  and a.event_date >= (%(as_of)s::date - interval '12 months')
 order by a.loan_id, a.event_date desc
 """
 

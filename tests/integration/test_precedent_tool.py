@@ -35,7 +35,8 @@ def _add_months(d: date, months: int) -> date:
 
 @pytest.fixture
 def subject(conn):
-    """A delinquent account at AS_OF, with its true state, so matching can be checked."""
+    """A delinquent account as last known on AS_OF - the month that has just
+    ended, never AS_OF's own month, which has not happened yet."""
     row = conn.execute(
         """
         select l.loan_account_no, s.bucket, s.is_in_moratorium
@@ -45,9 +46,9 @@ def subject(conn):
           and s.bucket = '31-60'
         limit 1
         """,
-        {"month": AS_OF},
+        {"month": _add_months(AS_OF, -1)},
     ).fetchone()
-    assert row is not None, "seed data has no 31-60 account at AS_OF"
+    assert row is not None, "seed data has no 31-60 account in the month before AS_OF"
     return row
 
 
@@ -64,7 +65,8 @@ def test_no_outcome_window_reaches_as_of(result):
 
     for row in result.data:
         started = date.fromisoformat(row["latest_precedent_month"])
-        assert _add_months(started, WINDOW) <= AS_OF
+        # Strictly before: an outcome in AS_OF's own month is not yet observable.
+        assert _add_months(started, WINDOW) < AS_OF
 
 
 def test_every_row_carries_a_sample_size(result):
