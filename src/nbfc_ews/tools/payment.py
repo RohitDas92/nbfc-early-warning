@@ -75,13 +75,17 @@ class GetPaymentBehaviour:
 
     @property
     def parameters(self) -> dict[str, Any]:
-        return{
+        return {
             "type": "object",
-            "properties":{
+            "properties": {
                 "account_id": {"type": "string"},
-                "months": {"type": "integer", "default": 12},
+                "months": {
+                    "type": ["integer", "null"],
+                    "description": "How many months of payment history. Null for the default of 12.",
+                },
             },
-            "required": ["account_id"]
+            "required": ["account_id", "months"],
+            "additionalProperties": False,
         }
 
 

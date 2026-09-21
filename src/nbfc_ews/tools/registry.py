@@ -26,3 +26,7 @@ def tools_for(agent: str) -> list[Tool]:
     allowed = _AGENT_TOOLS.get(agent, set())
     return [_REGISTRY[name] for name in sorted(allowed) if name in _REGISTRY]
 
+def all_tools() -> list[Tool]:
+    """Every registered tool, in name order."""
+    return [_REGISTRY[name] for name in sorted(_REGISTRY)]
+

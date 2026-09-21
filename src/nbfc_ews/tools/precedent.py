@@ -83,9 +83,13 @@ class FindSimilarAlerts:
             "type": "object",
             "properties": {
                 "account_id": {"type": "string"},
-                "window_months": {"type": "integer", "default": 3},
+                "window_months": {
+                    "type": ["integer", "null"],
+                    "description": "Size of the matching window in months. Null for the default of 3.",
+                },
             },
-            "required": ["account_id"],
+            "required": ["account_id", "window_months"],
+            "additionalProperties": False,
         }
     
     def __call__(
@@ -109,8 +113,9 @@ class FindSimilarAlerts:
         bucket, in_moratorium = state
 
         cur = conn.cursor(row_factory=dict_row)
-        rows = cur.execute(_PRECEDENT_SQL,
-                           {"bucket": bucket,
+        rows = cur.execute(
+            _PRECEDENT_SQL,
+                        {"bucket": bucket,
                             "in_moratorium": in_moratorium,
                             "as_of": as_of,
                             "window_months": window_months

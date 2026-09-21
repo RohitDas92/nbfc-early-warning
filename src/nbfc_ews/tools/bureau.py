@@ -80,9 +80,13 @@ class GetBureauHistory:
             "type": "object",
             "properties": {
                 "account_id": {"type": "string"},
-                "limit": {"type": "integer", "default": 8},
+                "limit": {
+                    "type": ["integer", "null"],
+                    "description": "How many recent bureau reports to return. Null for the default of 8.",
+                },
             },
-            "required": ["account_id"],
+            "required": ["account_id", "limit"],
+            "additionalProperties": False,
         }
     
     def __call__(

@@ -26,7 +26,12 @@ def dispatch(
     if set(call.arguments) & _INJECTED:
         return failure("conn, principal and as_of are supplied by system")
 
+
+    # Strict mode makes every parameter required, so "not given" arrives as
+    # null.  Drop those, and let each tool's own default apply.
+    arguments = {key: value for key, value in call.arguments.items() if value is not None}
+
     try:
-        return tool(conn, principal, as_of=as_of, **call.arguments)
+        return tool(conn, principal, as_of=as_of, **arguments)
     except TypeError as exc:
         return failure(f"bad argument for {call.name}: {exc}")

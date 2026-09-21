@@ -67,11 +67,15 @@ class GetContactHistory:
             "type": "object",
             "properties": {
                 "account_id": {"type": "string"},
-                "months": {"type": "integer", "default": 6},
+                "months": {
+                    "type": ["integer", "null"],
+                    "description": "How many months of contact history. Null for the default of 6.",
+                },
             },
-            "required": ["account_id"],
+            "required": ["account_id", "months"],
+            "additionalProperties": False,
         }
-   
+
     def __call__(
             self,
             conn,
