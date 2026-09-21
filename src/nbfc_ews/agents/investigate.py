@@ -2,7 +2,7 @@ import json
 from dataclasses import dataclass
 
 from nbfc_ews.agents.context import CaseContext
-from nbfc_ews.agents.dispatch import dispatch
+from nbfc_ews.agents.dispatch import dispatch, effective_arguments
 from nbfc_ews.domain.principal import Principal
 from nbfc_ews.llm.base import ChatModel, Message, ToolSpec
 from nbfc_ews.tools.base import ToolResult
@@ -98,12 +98,14 @@ def investigate(
                     ))
 
         for call in reply.tool_calls:
-            cached = ctx.read(call.name, **call.arguments)
+            # Normalised once: the cache, the call and the log all use this.
+            arguments = effective_arguments(call)
+            cached = ctx.read(call.name, **arguments)
             if cached is not None:
                 result = cached
             else:   
                 result =dispatch(call, agent, conn, principal, ctx.as_of)
-                ctx.record(agent, call.name, call.arguments, result)
+                ctx.record(agent, call.name, arguments, result)
                 tool_calls += 1
 
             messages.append(
