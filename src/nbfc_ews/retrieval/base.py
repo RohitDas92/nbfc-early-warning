@@ -34,6 +34,7 @@ class Piece:
     """One cut of text from a section. The splitter's output, not yet embedded."""
 
     heading_path: str
+    number: str
     chunk_index: int
     chunk_count: int
     text: str

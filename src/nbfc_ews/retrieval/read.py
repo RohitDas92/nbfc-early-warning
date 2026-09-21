@@ -21,8 +21,10 @@ class Section:
     """One headed part of a document body."""
 
     level: int
+    number: str
     heading: str
     body: str
+
 
 @dataclass(frozen=True)
 class RawDoc:
@@ -64,7 +66,7 @@ class MarkdownReader:
         # carries its name. That is the normal shape for our corpus.
 
         if not headings:
-            return (Section(level=2, heading="", body=body.strip()),)
+            return (Section(level=2, number="", heading="", body=body.strip()),)
 
         sections: list[Section] = []
 
@@ -73,7 +75,7 @@ class MarkdownReader:
 
         preamble = body[: headings[0].start()].strip()
         if preamble:
-            sections.append(Section(level=2, heading="", body=preamble))
+            sections.append(Section(level=2, number="", heading="", body=preamble))
 
         for index, heading in enumerate(headings):
             start = heading.end()
@@ -81,6 +83,7 @@ class MarkdownReader:
             sections.append(
                 Section(
                     level=len(heading.group(1)),
+                    number="",
                     heading=heading.group(2),
                     body=body[start:end].strip(),
                 )
