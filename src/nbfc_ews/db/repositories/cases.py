@@ -8,6 +8,7 @@ where state <> 'closed'
 _APPEND_EVENT_SQL = """
 insert into case_event (case_id, event_type, at, signal_type, detail, actor)
 values (%(case_id)s, %(event_type)s, %(at)s, %(signal_type)s, %(detail)s, %(actor)s)
+on conflict do nothing
 """
 
 _NEXT_ID_SQL = "select nextval(pg_get_serial_sequence('ews_case','id'))"
@@ -43,7 +44,10 @@ def open_case_types(conn) -> dict[str, str]:
 
 
 def append_event(conn, case_id: str, event_type: str, signal, at, actor="system") -> None:
-    """Record something that happened to a case. Append-only."""
+    """Record something that happened to a case. Append-only.
+
+    The same event for the same case on the same day is stored once; a
+    repeat is silently dropped by the unique index ux_case_event_once."""
     conn.execute(_APPEND_EVENT_SQL, {
         "case_id": case_id,
         "event_type": event_type,

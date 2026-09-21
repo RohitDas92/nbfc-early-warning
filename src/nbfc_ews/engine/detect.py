@@ -18,12 +18,16 @@ class DetectionRun:
     cohort_signals: list[CohortSignal]
 
 
-def detect(conn, as_of: date) -> DetectionRun:
-    """Run every signal rule over the book for one month."""
-    # Month-state rows exist once per month, so a mid-month business date
-    # has no clear meaning. Refuse it rather than guess.
+def require_business_date(as_of: date) -> None:
+    """Month-state rows exist once per month, so a mid-month business date
+    has no clear meaning.  Refuse it rather than guess."""
     if as_of.day != 1:
         raise ValueError(f"business date must be the first of a month, got {as_of}")
+
+
+def detect(conn, as_of: date) -> DetectionRun:
+    """Run every signal rule over the book for one month."""
+    require_business_date(as_of)
     facts = load_account_facts(conn, as_of)
 
     signals: list[Signal] = []

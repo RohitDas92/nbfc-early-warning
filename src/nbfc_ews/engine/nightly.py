@@ -7,8 +7,15 @@ from nbfc_ews.db.repositories.cases import (
     escalate_case,
     open_cases,
 )
-from nbfc_ews.engine.detect import detect
+from nbfc_ews.db.repositories.runs import claim_business_date
+from nbfc_ews.engine.detect import detect, require_business_date
 from nbfc_ews.engine.route import route_signals
+
+
+class AlreadyProcessed(Exception):
+    """This business date has already been run.  Running it again would
+    duplicate every case event, so the run refuses - loudly, so that a
+    scheduler repeating a finished date is noticed rather than hidden."""
 
 
 @dataclass(frozen=True)
@@ -20,7 +27,15 @@ class NightlyRun:
     joined: int
     escalated: int
 
-def run_nightly(conn, as_of:date) -> NightlyRun:
+def run_nightly(conn, as_of: date) -> NightlyRun:
+    """Detect, route and record one business date.  Once per date, ever.
+
+    The caller owns the transaction.  Commit only after this returns, so the
+    ledger claim and the case writes succeed or fail together."""
+    require_business_date(as_of)
+    if not claim_business_date(conn, as_of):
+        raise AlreadyProcessed(f"{as_of} has already been processed")
+
     run = detect(conn, as_of)
 
     existing = open_cases(conn)
