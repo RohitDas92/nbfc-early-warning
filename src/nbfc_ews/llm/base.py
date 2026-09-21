@@ -4,13 +4,6 @@ from typing import Any, Literal, Protocol
 
 MessageRole = Literal["system", "user", "assistant", "tool"]
 
-@dataclass(frozen=True)
-class Message:
-    """One turn in a conversation with a model."""
-
-    role: MessageRole
-    content: str
-    tool_call_id: str | None = None
 
 @dataclass(frozen=True)
 class ToolCall:
@@ -20,10 +13,27 @@ class ToolCall:
     name: str
     arguments: dict[str, Any]
 
+
+@dataclass(frozen=True)
+class Message:
+    """One turn in a conversation with a model.
+
+    An assistant message that asked for tools must carry those calls, so the
+    tool results that follow it can be matched back. Without them the API
+    rejects the next request: a tool result with nothing to answer.
+    """
+
+    role: MessageRole
+    content: str
+    tool_call_id: str | None = None
+    tool_calls: tuple[ToolCall, ...] = ()
+
+
 @dataclass(frozen=True)
 class Usage:
     input_tokens: int
     output_tokens: int
+
 
 @dataclass(frozen=True)
 class ModelReply:
@@ -34,6 +44,7 @@ class ModelReply:
     usage: Usage
     model: str
 
+
 @dataclass(frozen=True)
 class ToolSpec:
     """What the model is *told* about a tool. Not the tool itself."""
@@ -42,6 +53,7 @@ class ToolSpec:
     description: str
     parameters: dict[str, Any]
 
+
 class ChatModel(Protocol):
     """Anything that can be asked a question. Fake or real."""
 
@@ -49,9 +61,7 @@ class ChatModel(Protocol):
     def name(self) -> str: ...
 
     def complete(
-            self,
-            messages: Sequence[Message],
-            tools: Sequence[ToolSpec] = (),
+        self,
+        messages: Sequence[Message],
+        tools: Sequence[ToolSpec] = (),
     ) -> ModelReply: ...
-
-    

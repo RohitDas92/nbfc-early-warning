@@ -51,7 +51,6 @@ class CaseContext:
         for entry in self._entries:
             if entry.tool == tool and entry.arguments == want and entry.result.ok:
                 return entry.result
-            return None
         return None
 
     def entries(self) -> tuple[Entry, ...]:

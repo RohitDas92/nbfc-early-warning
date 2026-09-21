@@ -11,9 +11,9 @@ from nbfc_ews.tools.registry import tools_for
 _SYSTEM = (
     "You are the {agent} investigator for an education-loan NBFC's early warning"
     " system. The business date is {as_of}; every tool answers as of that date and"
-    " no later data exits. Use your tools to gather evidence, then state what you"
+    " no later data exists. Use your tools to gather evidence, then state what you"
     " found in three sentences or fewer. Report only what the tool results support,"
-    " and say so plainly if the evidence is this. Do not recommend an action -"
+    " and say so plainly if the evidence is thin. Do not recommend an action -"
     " another agent decides that."
 )
 
@@ -42,7 +42,7 @@ def specs_for(agent: str) -> list[ToolSpec]:
 def _as_text(result: ToolResult) -> str:
     """A tool result, as the model will read it.""" 
     if not result.ok:
-        return json.dumps({"ok": False, "resson": result.reason})
+        return json.dumps({"ok": False, "reason": result.reason})
 
     return json.dumps(
         {
@@ -93,7 +93,9 @@ def investigate(
                 output_tokens=output_tokens,
             )
 
-        messages.append(Message(role="assistant", content=reply.text or ""))
+        messages.append(
+            Message(role="assistant", content=reply.text or "", tool_calls=reply.tool_calls
+                    ))
 
         for call in reply.tool_calls:
             cached = ctx.read(call.name, **call.arguments)
