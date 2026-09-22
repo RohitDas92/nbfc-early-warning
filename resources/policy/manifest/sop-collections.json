@@ -1,0 +1,211 @@
+{
+  "doc_id": "sop-collections",
+  "file": "sop-collections.docx",
+  "sections": {
+    "1.1": {
+      "acl_groups": [],
+      "department": "collections",
+      "effective_from": "2019-01-01",
+      "effective_to": null,
+      "heading": "Purpose and scope",
+      "rule_key": null,
+      "sensitivity": 1,
+      "source_ref": "MD-NBFC-Outsourcing-2025 para 17",
+      "version": 1
+    },
+    "2.1": {
+      "acl_groups": [],
+      "department": "collections",
+      "effective_from": "2019-01-01",
+      "effective_to": null,
+      "heading": "Days past due and SMA buckets",
+      "rule_key": null,
+      "sensitivity": 1,
+      "source_ref": "MD-NBFC-StressedAssets-2025 para 18; MD-NBFC-IRACP-2025 paras 18-19, 51",
+      "version": 1
+    },
+    "2.2": {
+      "acl_groups": [],
+      "department": "collections",
+      "effective_from": "2019-01-01",
+      "effective_to": null,
+      "heading": "Cure and upgrade",
+      "rule_key": null,
+      "sensitivity": 1,
+      "source_ref": "MD-NBFC-IRACP-2025 paras 24-25",
+      "version": 1
+    },
+    "3.1": {
+      "acl_groups": [],
+      "department": "collections",
+      "effective_from": "2019-01-01",
+      "effective_to": null,
+      "heading": "Soft contact with the borrower",
+      "rule_key": "soft_contact.min_dpd",
+      "sensitivity": 2,
+      "source_ref": "MD-NBFC-ResponsibleBusinessConduct-2025 para 100",
+      "version": 1
+    },
+    "3.2": {
+      "acl_groups": [],
+      "department": "collections",
+      "effective_from": "2019-01-01",
+      "effective_to": null,
+      "heading": "Mandate repair",
+      "rule_key": "mandate_repair.min_dpd",
+      "sensitivity": 2,
+      "source_ref": "Internal",
+      "version": 1
+    },
+    "3.3": {
+      "acl_groups": [],
+      "department": "collections",
+      "effective_from": "2019-01-01",
+      "effective_to": null,
+      "heading": "Payment date change",
+      "rule_key": "payment_date_change.max_dpd",
+      "sensitivity": 2,
+      "source_ref": "MD-NBFC-ResponsibleBusinessConduct-2025 para 30(1)",
+      "version": 1
+    },
+    "3.4": {
+      "acl_groups": [],
+      "department": "collections",
+      "effective_from": "2019-01-01",
+      "effective_to": null,
+      "heading": "Contact with the co-applicant",
+      "rule_key": "contact_co_applicant.min_dpd",
+      "sensitivity": 2,
+      "source_ref": "MD-NBFC-ResponsibleBusinessConduct-2025 para 100",
+      "version": 1
+    },
+    "4.1": {
+      "acl_groups": [],
+      "department": "collections",
+      "effective_from": "2019-01-01",
+      "effective_to": null,
+      "heading": "Permitted contact hours",
+      "rule_key": "contact.permitted_hours",
+      "sensitivity": 2,
+      "source_ref": "MD-NBFC-ResponsibleBusinessConduct-2025 para 100",
+      "version": 1
+    },
+    "4.2": {
+      "acl_groups": [],
+      "department": "collections",
+      "effective_from": "2019-01-01",
+      "effective_to": null,
+      "heading": "Prohibited practices",
+      "rule_key": "contact.prohibited_practices",
+      "sensitivity": 2,
+      "source_ref": "MD-NBFC-ResponsibleBusinessConduct-2025 paras 20, 100",
+      "version": 1
+    },
+    "4.3": {
+      "acl_groups": [],
+      "department": "collections",
+      "effective_from": "2019-01-01",
+      "effective_to": null,
+      "heading": "Outsourced recovery agents",
+      "rule_key": null,
+      "sensitivity": 2,
+      "source_ref": "MD-NBFC-Outsourcing-2025 para 17; MD-NBFC-ResponsibleBusinessConduct-2025 paras 97-99",
+      "version": 1
+    },
+    "5.1": {
+      "acl_groups": [],
+      "department": "collections",
+      "effective_from": "2019-01-01",
+      "effective_to": null,
+      "heading": "Handover to the collections team",
+      "rule_key": "handover.min_dpd",
+      "sensitivity": 2,
+      "source_ref": "Internal",
+      "version": 1
+    },
+    "5.2": {
+      "acl_groups": [],
+      "department": "collections",
+      "effective_from": "2019-01-01",
+      "effective_to": null,
+      "heading": "Field visit",
+      "rule_key": "field_visit.min_dpd",
+      "sensitivity": 2,
+      "source_ref": "Internal",
+      "version": 1
+    },
+    "6.1": {
+      "acl_groups": [],
+      "department": "collections",
+      "effective_from": "2019-01-01",
+      "effective_to": null,
+      "heading": "Actions forbidden during moratorium",
+      "rule_key": "moratorium.forbidden_actions",
+      "sensitivity": 2,
+      "source_ref": "Internal",
+      "version": 1
+    },
+    "6.2": {
+      "acl_groups": [],
+      "department": "collections",
+      "effective_from": "2019-01-01",
+      "effective_to": null,
+      "heading": "Penal charges",
+      "rule_key": "penal_charges.treatment",
+      "sensitivity": 2,
+      "source_ref": "MD-NBFC-ResponsibleBusinessConduct-2025 para 30",
+      "version": 1
+    },
+    "7.1": {
+      "acl_groups": [],
+      "department": "collections",
+      "effective_from": "2026-07-01",
+      "effective_to": null,
+      "heading": "Credit bureau reporting",
+      "rule_key": "bureau.reporting_cycle",
+      "sensitivity": 2,
+      "source_ref": "MD-NBFC-CreditInformationReporting-2025 paras 6(2), 34(1), 35(1)",
+      "version": 2
+    },
+    "8.1": {
+      "acl_groups": [
+        "fraud"
+      ],
+      "department": "collections",
+      "effective_from": "2019-01-01",
+      "effective_to": null,
+      "heading": "Suspected fraud escalation",
+      "rule_key": "fraud.escalation",
+      "sensitivity": 3,
+      "source_ref": "MD-NBFC-FraudRiskManagement-2026 paras 6(1), 13, 15",
+      "version": 1
+    },
+    "8.2": {
+      "acl_groups": [
+        "fraud"
+      ],
+      "department": "collections",
+      "effective_from": "2019-01-01",
+      "effective_to": null,
+      "heading": "Wilful default assessment",
+      "rule_key": "wilful_default.assessment",
+      "sensitivity": 3,
+      "source_ref": "MD-NBFC-StressedAssets-2025 Chapter \u2014 Borrowers who have committed Frauds / Malfeasance / Wilful Default",
+      "version": 1
+    },
+    "9.1": {
+      "acl_groups": [
+        "hr"
+      ],
+      "department": "collections",
+      "effective_from": "2019-01-01",
+      "effective_to": null,
+      "heading": "Agent misconduct and blacklisting",
+      "rule_key": "agent.misconduct",
+      "sensitivity": 3,
+      "source_ref": "MD-NBFC-ResponsibleBusinessConduct-2025 paras 97-100",
+      "version": 1
+    }
+  },
+  "title": "Collections Standard Operating Procedure"
+}
