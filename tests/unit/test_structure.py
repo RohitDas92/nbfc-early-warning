@@ -184,3 +184,30 @@ def test_runs_of_spaces_are_collapsed() -> None:
     doc = build_structure([h("1.  Scope   of  work"), p("x")])
 
     assert doc.sections[0].heading == "1. Scope of work"
+
+
+# --- a parser that labels paragraphs as headings ---------------------------------
+
+
+def test_heading_number_can_come_from_marker() -> None:
+    doc = build_structure([
+        Item("heading", "Chapter I - Preliminary"),
+        Item("heading", "These Directions shall be called the RBI Directions.", marker="1."),
+        Item("heading", "They shall come into force on April 1, 2025.", marker="2."),
+    ])
+
+    assert [s.number for s in doc.sections] == ["1", "2"]
+    assert doc.quality.numbered_share == 1.0
+
+
+def test_inline_marked_heading_is_a_subclause() -> None:
+    doc = build_structure([
+        Item("heading", "Applicability", marker="3."),
+        Item("heading", "NBFC-D registered with the RBI.", marker="(1)"),
+        Item("heading", "NBFC-ND above the threshold.", marker="(2)"),
+    ])
+
+    assert len(doc.sections) == 1
+    assert doc.sections[0].number == "3"
+    assert "(1) NBFC-D registered" in doc.sections[0].body
+    assert "(2) NBFC-ND above" in doc.sections[0].body

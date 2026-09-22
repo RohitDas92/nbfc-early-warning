@@ -16,12 +16,18 @@ JULY = date(2026, 7, 1)
 
 @pytest.fixture
 def clean(conn):
-    """Empty case tables and ledger.  The conn fixture rolls all of this back."""
+    """Empty case tables and ledger.  The conn fixture rolls all of this back.
+
+    Children before parents: the database refuses to delete a case that
+    investigations still point at.
+    """
+    conn.execute("delete from evidence")
+    conn.execute("delete from finding")
+    conn.execute("delete from investigation")
     conn.execute("delete from case_event")
     conn.execute("delete from ews_case")
     conn.execute("delete from nightly_run")
     return conn
-
 
 def counts(conn) -> tuple[int, int]:
     cases = conn.execute("select count(*) from ews_case").fetchone()[0]

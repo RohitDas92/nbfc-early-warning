@@ -140,6 +140,13 @@ def _clean_heading(text: str) -> str:
     text = _FOOTNOTE_MARK.sub("", " ".join(text.split()))
     return " ".join(text.replace("]", "").split())
 
+_SENTENCE_END = (".", ";", ":", "?", "!")
+_TITLE_MAX = 80
+
+
+def _is_paragraph(text: str) -> bool:
+    """A title is short and unpunctuated; anything longer is body text."""
+    return text.endswith(_SENTENCE_END) or len(text) > _TITLE_MAX
 
 # --- building the structure ---------------------------------------------------
 
@@ -199,13 +206,26 @@ class _Builder:
 
     def _heading(self, item: Item, text: str) -> None:
         label = _clean_heading(text)
-        enum = parse_enumerator(label, self.last)
-        if enum is not None and enum.inline:
-            enum = None  # a heading that starts "(a)" is just a heading
+        line = f"{item.marker} {label}".strip() if item.marker else label
+        enum = parse_enumerator(line, self.last)
         if enum is not None:
             self.last[enum.style] = enum.number
 
-        if self.has_levels and item.level is not None:
+        # A bracketed heading is a sub-clause: it belongs to the open section.
+        if enum is not None and enum.inline:
+            self.current.body.append(line)
+            return
+
+        # A Chapter/Part/Annex enumerator names a container, never a paragraph,
+        # however long its title runs.
+        structural = enum is not None and enum.style.startswith("word-")
+        prose = not structural and _is_paragraph(enum.rest if enum is not None else label)
+
+        if enum is None and prose:
+            self.current.body.append(line)  # unnumbered prose: keep it with its clause
+            return
+
+        if item.level is not None:
             level = item.level
             if self.previous_heading_level is not None and level > self.previous_heading_level + 1:
                 self.level_jumps += 1
@@ -213,9 +233,10 @@ class _Builder:
         elif enum is not None:
             level = self._level_for(enum.style)
         else:
-            level = len(self.styles) + 1  # an unnumbered heading sits under the current numbering
+            level = len(self.styles) + 1
 
-        self._open(level, enum.number if enum else "", label=label, first=None)
+        number = enum.number if enum is not None else ""
+        self._open(level, number, label="" if prose else line, first=line if prose else None)
 
     def _level_for(self, style: str) -> int:
         """Seen before: back to its level.  New: one deeper than the deepest open."""
