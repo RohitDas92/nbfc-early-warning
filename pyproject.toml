@@ -15,6 +15,7 @@ dependencies = [
 
 [project.optional-dependencies]
 pdf = ["docling"]
+ui = ["streamlit>=1.40", "httpx"]
 dev = [
     "pytest>=8.0",
     "pytest-cov>=5.0",
