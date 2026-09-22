@@ -38,13 +38,18 @@ def main() -> None:
             )
 
         before_cases = conn.execute("select count(*) from ews_case").fetchone()[0]
+        before_runs = conn.execute("select count(*) from investigation").fetchone()[0]
+        # Investigations belong to the cases being deleted, so they go first.
+        conn.execute("delete from evidence")
+        conn.execute("delete from finding")
+        conn.execute("delete from investigation")
         conn.execute("delete from case_event")
         conn.execute("delete from ews_case")
         conn.execute("delete from nightly_run")
         # Case ids are built from this sequence; restart it so a rebuild is
         # reproducible - same data, same rules, same case ids.
         conn.execute("select setval(pg_get_serial_sequence('ews_case', 'id'), 1, false)")
-        print(f"deleted {before_cases} cases")
+        print(f"deleted {before_cases} cases and {before_runs} investigations")
 
         for as_of in dates:
             print(run_nightly(conn, as_of))
