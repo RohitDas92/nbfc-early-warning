@@ -1,40 +1,20 @@
 {
+  "acl_groups": [],
+  "department": "collections",
   "doc_id": "sop-mandate",
+  "effective_from": "2019-01-01",
+  "effective_to": null,
   "file": "sop-mandate.docx",
-  "sections": {
-    "1.1": {
-      "acl_groups": [],
-      "department": "collections",
-      "effective_from": "2019-01-01",
-      "effective_to": null,
-      "heading": "Mandate registration",
-      "rule_key": "mandate.registration",
-      "sensitivity": 2,
-      "source_ref": "Internal",
-      "version": 1
-    },
-    "1.2": {
-      "acl_groups": [],
-      "department": "collections",
-      "effective_from": "2019-01-01",
-      "effective_to": null,
-      "heading": "Mandate presentation and re-presentation",
-      "rule_key": "mandate.presentation",
-      "sensitivity": 2,
-      "source_ref": "Internal",
-      "version": 1
-    },
+  "overrides": {
     "1.3": {
-      "acl_groups": [],
-      "department": "collections",
       "effective_from": "2019-01-01",
       "effective_to": null,
-      "heading": "Bounce handling",
-      "rule_key": "mandate.bounce_handling",
-      "sensitivity": 2,
       "source_ref": "MD-NBFC-ResponsibleBusinessConduct-2025 para 30",
       "version": 1
     }
   },
-  "title": "Mandate Operations Standard Operating Procedure"
+  "sensitivity": 2,
+  "source_ref": "Internal",
+  "title": "Mandate Operations Standard Operating Procedure",
+  "version": 1
 }

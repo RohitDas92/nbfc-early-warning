@@ -10,6 +10,7 @@ import tiktoken
 
 from nbfc_ews.retrieval.base import Piece
 from nbfc_ews.retrieval.read import RawDoc, Section
+from nbfc_ews.retrieval.structure import parse_enumerator
 
 # Regulatory text wants largeer chunks than general pros - clauses reference
 # each other, and cutting a proviso away from its clause can reverse it.
@@ -40,6 +41,12 @@ def count_tokens(text: str) -> int:
 
     return len(_encoding().encode(text))
 
+def _already_numbered(heading: str, number: str) -> bool:
+    """True when the last heading segment already opens with this number."""
+    last = heading.split(" > ")[-1].strip()
+    enum = parse_enumerator(last, {})
+    return enum is not None and enum.number == number
+
 def split(
         doc: RawDoc,
         *,
@@ -55,7 +62,7 @@ def split(
         parts = [base]
         if section.heading:
             parts.append(section.heading)
-        if section.number:
+        if section.number and not _already_numbered(parts[-1], section.number):
             parts.append(f"para {section.number}")
         path = " > ".join(parts)
 
@@ -89,6 +96,7 @@ def _merge_short(sections: tuple[Section, ...], min_tokens: int) -> list[Section
             previous is not None
             and count_tokens(previous.body) < min_tokens
             and section.level >= previous.level
+            and not (previous.number and section.number)
         ):
             merged[-1] = Section(
                 level= previous.level,

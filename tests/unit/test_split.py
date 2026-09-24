@@ -97,8 +97,8 @@ def test_chunk_count_is_per_section_not_per_document() -> None:
 
 def test_a_short_section_merges_into_the_next() -> None:
     doc = make_doc(
-        section(words(3), heading="A", number="1"),
-        section(words(20), heading="B", number="2"),
+        section(words(3), heading="A"),
+        section(words(20), heading="B"),
     )
     pieces = chunk(doc)
 
@@ -195,3 +195,37 @@ def test_splitting_is_deterministic() -> None:
 
 def test_empty_sections_produce_no_pieces() -> None:
     assert chunk(make_doc(section("   "), section("\n\n"))) == []
+
+# --- citation integrity -----------------------------------------------------
+
+
+def test_two_numbered_sections_never_merge() -> None:
+    pieces = chunk(make_doc(
+        section(words(5), number="12", heading="B. Applicability"),
+        section(words(5), number="13", heading="B. Applicability"),
+    ))
+
+    assert [p.number for p in pieces] == ["12", "13"]
+
+
+def test_a_short_unnumbered_section_still_merges() -> None:
+    pieces = chunk(make_doc(
+        section(words(5), heading="Overview"),
+        section(words(20), heading="Process"),
+    ))
+
+    assert len(pieces) == 1
+
+
+def test_a_numbered_heading_is_not_repeated_as_para() -> None:
+    pieces = chunk(make_doc(section(words(20), number="2.1", heading="2.1 Days past due")))
+
+    assert pieces[0].heading_path == "sop > 2.1 Days past due"
+
+
+def test_a_paragraph_number_is_added_when_the_heading_lacks_it() -> None:
+    pieces = chunk(make_doc(
+        section(words(20), number="4", heading="Chapter I - Preliminary > B. Applicability")
+    ))
+
+    assert pieces[0].heading_path == "sop > Chapter I - Preliminary > B. Applicability > para 4"

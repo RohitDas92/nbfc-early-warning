@@ -1,18 +1,12 @@
 {
+  "acl_groups": [],
+  "department": "collections",
   "doc_id": "sop-collections",
+  "effective_from": "2019-01-01",
+  "effective_to": "2026-07-01",
   "file": "archive/sop-collections--7.1--until-2026-07-01.docx",
-  "sections": {
-    "7.1": {
-      "acl_groups": [],
-      "department": "collections",
-      "effective_from": "2019-01-01",
-      "effective_to": "2026-07-01",
-      "heading": "Credit bureau reporting",
-      "rule_key": "bureau.reporting_cycle",
-      "sensitivity": 2,
-      "source_ref": "RBI (Credit Information Reporting) Directions, 2025 s.6(1)(b), s.16(1), s.16(6)",
-      "version": 1
-    }
-  },
-  "title": "Collections Standard Operating Procedure"
+  "sensitivity": 2,
+  "source_ref": "RBI (Credit Information Reporting) Directions, 2025 s.6(1)(b), s.16(1), s.16(6)",
+  "title": "Collections Standard Operating Procedure",
+  "version": 1
 }

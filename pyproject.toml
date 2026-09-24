@@ -11,6 +11,7 @@ dependencies = [
     "tiktoken",
     "fastapi>=0.115",
     "uvicorn>=0.30",
+
 ]
 
 [project.optional-dependencies]
@@ -37,3 +38,6 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.mypy]
+strict_equality = true

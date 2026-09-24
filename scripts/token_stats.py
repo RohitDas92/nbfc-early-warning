@@ -1,13 +1,11 @@
 """Exact token counts for the policy corpus, using the embedder's own tokenizer."""
 
 import glob
-import io
 import re
 import statistics
 from pathlib import Path
 
 import tiktoken
-import yaml
 
 ROOT = Path(__file__).resolve().parent.parent / "resources" / "policy"
 enc = tiktoken.get_encoding("cl100k_base")
@@ -16,8 +14,8 @@ rows = []
 for path in sorted(glob.glob(str(ROOT / "*" / "*.md"))):
     if path.endswith("README.md"):
         continue
-    raw = io.open(path, encoding="utf-8").read()
-    match = re.match(r"^---\n(.*?)\n---\n\n(.*)$", raw, re.S)
+    raw = Path(path).read_text(encoding="utf-8")
+    match = re.match(r"^---\n(.*?)\n---\n\n(.*)$", raw, re.DOTALL)
     body = match.group(2)
     words = len(body.split())
     tokens = len(enc.encode(body))

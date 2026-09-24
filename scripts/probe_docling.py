@@ -49,3 +49,20 @@ for item, _ in doc.iterate_items():
         shown += 1
         if shown == 10:
             break
+
+print()
+print("HEADER LEVELS")
+for item, _ in doc.iterate_items():
+    if type(item).__name__ == "SectionHeaderItem":
+        print(f"  level={getattr(item, 'level', None)}  {item.text[:60]}")
+
+print()
+print("PARENTS OF DEEPER TEXT ITEMS")
+for item, level in doc.iterate_items():
+    if level >= 5 and type(item).__name__ == "TextItem":
+        parent = item.parent.resolve(doc) if item.parent is not None else None
+        print(f"  lvl={level} parent={type(parent).__name__} "
+              f"label={getattr(parent, 'label', None)} "
+              f"ref={item.parent.cref if item.parent else None}  {item.text[:40]!r}")
+        if item.text.startswith(", irrespective"):
+            break

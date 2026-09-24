@@ -1,73 +1,44 @@
 {
+  "acl_groups": [],
+  "department": "collections",
   "doc_id": "policy-settlement",
+  "effective_from": "2019-01-01",
+  "effective_to": null,
   "file": "policy-settlement.docx",
-  "sections": {
-    "1.1": {
-      "acl_groups": [],
-      "department": "collections",
-      "effective_from": "2019-01-01",
-      "effective_to": null,
-      "heading": "Settlement eligibility",
-      "rule_key": "settlement.min_dpd",
-      "sensitivity": 2,
-      "source_ref": "Internal; see MD-NBFC-StressedAssets-2025",
-      "version": 1
-    },
+  "overrides": {
     "1.2": {
-      "acl_groups": [],
-      "department": "collections",
       "effective_from": "2019-01-01",
       "effective_to": null,
-      "heading": "Independence of the approving authority",
-      "rule_key": "settlement.approver_independence",
-      "sensitivity": 2,
       "source_ref": "MD-NBFC-StressedAssets-2025 para 16(5)(i)",
       "version": 1
     },
     "2.1": {
-      "acl_groups": [],
-      "department": "collections",
       "effective_from": "2019-01-01",
       "effective_to": null,
-      "heading": "Interest waiver up to Rs 25,000",
-      "rule_key": "waiver.interest.upto_25k",
-      "sensitivity": 2,
       "source_ref": "Internal",
       "version": 1
     },
     "2.2": {
-      "acl_groups": [],
-      "department": "collections",
       "effective_from": "2019-01-01",
       "effective_to": null,
-      "heading": "Interest waiver above Rs 25,000 and up to Rs 1,00,000",
-      "rule_key": "waiver.interest.25k_to_1l",
-      "sensitivity": 2,
       "source_ref": "Internal",
       "version": 1
     },
     "2.3": {
-      "acl_groups": [],
-      "department": "collections",
       "effective_from": "2019-01-01",
       "effective_to": null,
-      "heading": "Interest waiver above Rs 1,00,000",
-      "rule_key": "waiver.interest.above_1l",
-      "sensitivity": 2,
       "source_ref": "Internal",
       "version": 1
     },
     "2.4": {
-      "acl_groups": [],
-      "department": "collections",
       "effective_from": "2019-01-01",
       "effective_to": null,
-      "heading": "Waiver of principal",
-      "rule_key": "waiver.principal.prohibition",
-      "sensitivity": 2,
       "source_ref": "Internal",
       "version": 1
     }
   },
-  "title": "Settlement Policy"
+  "sensitivity": 2,
+  "source_ref": "Internal; see MD-NBFC-StressedAssets-2025",
+  "title": "Settlement Policy",
+  "version": 1
 }

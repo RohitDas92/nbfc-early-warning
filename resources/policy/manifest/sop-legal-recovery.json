@@ -1,56 +1,20 @@
 {
+  "acl_groups": [],
+  "department": "legal",
   "doc_id": "sop-legal-recovery",
+  "effective_from": "2019-01-01",
+  "effective_to": null,
   "file": "sop-legal-recovery.docx",
-  "sections": {
-    "1.1": {
-      "acl_groups": [],
-      "department": "legal",
-      "effective_from": "2019-01-01",
-      "effective_to": null,
-      "heading": "Scope and receipt from collections",
-      "rule_key": "legal_recovery.min_dpd",
-      "sensitivity": 2,
-      "source_ref": "Internal",
-      "version": 1
-    },
-    "2.1": {
-      "acl_groups": [],
-      "department": "legal",
-      "effective_from": "2019-01-01",
-      "effective_to": null,
-      "heading": "Notice before legal action",
-      "rule_key": "legal_recovery.notice_period",
-      "sensitivity": 2,
-      "source_ref": "Internal",
-      "version": 1
-    },
-    "3.1": {
-      "acl_groups": [
-        "legal"
-      ],
-      "department": "legal",
-      "effective_from": "2019-01-01",
-      "effective_to": null,
-      "heading": "Invoking the arbitration clause",
-      "rule_key": "legal_recovery.arbitration",
-      "sensitivity": 3,
-      "source_ref": "Internal",
-      "version": 1
-    },
+  "overrides": {
     "4.1": {
-      "acl_groups": [
-        "legal",
-        "finance"
-      ],
-      "department": "legal",
       "effective_from": "2019-01-01",
       "effective_to": null,
-      "heading": "Recommending a technical write-off",
-      "rule_key": "write_off.recommendation",
-      "sensitivity": 3,
       "source_ref": "MD-NBFC-StressedAssets-2025 para 16",
       "version": 1
     }
   },
-  "title": "Legal Recovery Standard Operating Procedure"
+  "sensitivity": 2,
+  "source_ref": "Internal",
+  "title": "Legal Recovery Standard Operating Procedure",
+  "version": 1
 }

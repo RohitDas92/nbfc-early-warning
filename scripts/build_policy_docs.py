@@ -8,11 +8,13 @@ publish - and what ingestion reads.  Ingestion never reads the Markdown.
 
     docx/<doc_id>.docx                                 the current document
     docx/archive/<doc_id>--<n>--until-<date>.docx      each superseded version
-    manifest/<same path>.json                          metadata per section
+    manifest/<same path>.json                          metadata per document
     pdf/<doc_id>.pdf                                   a printout, for people
 
-A manifest plays the part of SharePoint's metadata columns: rule_key, access
-groups, effective dates - things a Word document cannot sensibly carry.
+A manifest plays the part of a document management system's metadata columns:
+owner, access groups, version, effective dates - things a Word document cannot
+sensibly carry.  It is written per document, as a DMS holds it, with overrides
+only for clauses that genuinely stand apart.
 
 Word files are patched between pandoc and LibreOffice so that no table can
 split across a page: a split table is unrecoverable by any parser.
@@ -48,8 +50,12 @@ TITLES = {
 
 ORG = "Vidyanidhi Education Finance Limited"
 
-_FRONTMATTER = re.compile(r"\A---\s*\n(.*?)\n---\s*\n(.*)\Z", re.S)
+_FRONTMATTER = re.compile(r"\A---\s*\n(.*?)\n---\s*\n(.*)\Z", re.DOTALL)
 _DOTTED = re.compile(r"^\d+(\.\d+)+$")
+
+# Metadata a clause may carry in its own right.  Everything else is a property
+# of the document, and every clause in it inherits it.
+_PER_CLAUSE = ("version", "effective_from", "effective_to", "source_ref")
 
 
 @dataclass(frozen=True)
@@ -96,13 +102,13 @@ def read_sections(doc_id: str) -> list[SectionFile]:
 
 # --- docx table pinning -------------------------------------------------------
 
-_TABLE = re.compile(r"<w:tbl>.*?</w:tbl>", re.S)
-_ROW = re.compile(r"<w:tr(?:\s[^>]*)?>.*?</w:tr>", re.S)
+_TABLE = re.compile(r"<w:tbl>.*?</w:tbl>", re.DOTALL)
+_ROW = re.compile(r"<w:tr(?:\s[^>]*)?>.*?</w:tr>", re.DOTALL)
 _ROW_OPEN = re.compile(r"<w:tr(?:\s[^>]*)?>")
-_TRPR = re.compile(r"<w:trPr>(.*?)</w:trPr>", re.S)
-_PARA = re.compile(r"<w:p(?:\s[^>]*)?>.*?</w:p>", re.S)
+_TRPR = re.compile(r"<w:trPr>(.*?)</w:trPr>", re.DOTALL)
+_PARA = re.compile(r"<w:p(?:\s[^>]*)?>.*?</w:p>", re.DOTALL)
 _PARA_OPEN = re.compile(r"<w:p(?:\s[^>]*)?>")
-_PPR = re.compile(r"<w:pPr>(.*?)</w:pPr>", re.S)
+_PPR = re.compile(r"<w:pPr>(.*?)</w:pPr>", re.DOTALL)
 _PSTYLE = re.compile(r"<w:pStyle[^>]*/>")
 
 
@@ -183,26 +189,43 @@ def write_docx(target: Path, title: str, subtitle: str, sections: list[SectionFi
 def write_manifest(
     target: Path, doc_id: str, title: str, docx_file: str, sections: list[SectionFile]
 ) -> None:
-    """Metadata for every section of one Word file, keyed by section number."""
-    manifest = {
+    """Document-level metadata, plus per-clause overrides only where they differ.
+
+    A document management system carries one row of metadata per document, not
+    per clause, so that is the shape ingestion is given.  Where a clause
+    genuinely stands apart - substituted on its own date, or citing a different
+    authority - the difference is written out as an override.  This function
+    works those out by comparing sections; nobody maintains a list by hand.
+    """
+    first = sections[0].meta
+    manifest: dict[str, Any] = {
         "doc_id": doc_id,
         "title": title,
         "file": docx_file,
-        "sections": {
-            s.number: {
-                "heading": s.meta["heading"],
-                "rule_key": s.meta["rule_key"],
-                "source_ref": s.meta["source_ref"],
-                "version": s.meta["version"],
-                "effective_from": _iso(s.meta["effective_from"]),
-                "effective_to": _iso(s.meta["effective_to"]),
-                "department": s.meta["department"],
-                "sensitivity": s.meta["sensitivity"],
-                "acl_groups": list(s.meta["acl_groups"] or []),
-            }
-            for s in sections
-        },
+        "department": first["department"],
+        "sensitivity": first["sensitivity"],
+        "acl_groups": list(first["acl_groups"] or []),
+        "version": first["version"],
+        "effective_from": _iso(first["effective_from"]),
+        "effective_to": _iso(first["effective_to"]),
+        "source_ref": first["source_ref"],
     }
+
+    defaults = {key: manifest[key] for key in _PER_CLAUSE}
+    overrides: dict[str, dict[str, Any]] = {}
+    for section in sections:
+        values = {
+            "version": section.meta["version"],
+            "effective_from": _iso(section.meta["effective_from"]),
+            "effective_to": _iso(section.meta["effective_to"]),
+            "source_ref": section.meta["source_ref"],
+        }
+        if values != defaults:
+            overrides[section.number] = values
+
+    if overrides:
+        manifest["overrides"] = overrides
+
     target.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 

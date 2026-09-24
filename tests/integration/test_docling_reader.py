@@ -5,7 +5,6 @@
 Skipped when Docling is not installed or a file is missing (CI has neither).
 """
 
-import json
 import os
 from pathlib import Path
 
@@ -46,11 +45,6 @@ def section(doc, number: str):
 
 
 # --- the Word document ---------------------------------------------------------
-
-
-def test_every_numbered_section_matches_the_manifest_both_ways(sop) -> None:
-    manifest = json.loads((POLICY / "manifest" / "sop-collections.json").read_text(encoding="utf-8"))
-    assert {s.number for s in sop.sections if s.number} == set(manifest["sections"])
 
 
 def test_word_headings_give_exact_levels(sop) -> None:
