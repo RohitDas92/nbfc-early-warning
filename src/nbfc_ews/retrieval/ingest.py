@@ -72,7 +72,12 @@ def ingest(conn, root, *, reader, embedder) -> IngestReport:
     #3. turn every chunk's text into number
     #Embedding is a network call: do it before the transaction opens, never
     #while holding locks on the table readers are searching.
-    vectors = _embed_all(embedder, [chunk.text for chunk in chunks])
+    # The heading path goes into the vector but not into the stored text: a
+    # short clause is unfindable on its own words, and a citation must still
+    # point at exactly one clause.
+    vectors = _embed_all(
+        embedder, [f"{chunk.heading_path}\n\n{chunk.text}" for chunk in chunks]
+    )
 
     with conn.transaction():
         conn.execute("delete from policy_chunk")

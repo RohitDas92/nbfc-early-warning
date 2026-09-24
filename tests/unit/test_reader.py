@@ -161,3 +161,15 @@ After.
 
     assert doc.meta == {"doc_id": "x"}
     assert "After." in doc.sections[0].body
+
+# --- gluing formatting runs ---------------------------------------------------
+
+
+def test_formatting_runs_are_glued_back_with_their_spaces() -> None:
+    """Word splits a run at every bold or italic change, losing the space."""
+    from nbfc_ews.retrieval.docling_reader import _glue
+
+    assert _glue(["SOP 5.1.", "It is forbidden"]) == "SOP 5.1. It is forbidden"
+    assert _glue(["as on the", "9th, 16th", "of the month"]) == "as on the 9th, 16th of the month"
+    assert _glue(["Cure is not upgrade", "."]) == "Cure is not upgrade."
+    assert _glue(["one", "  ", "two"]) == "one two"

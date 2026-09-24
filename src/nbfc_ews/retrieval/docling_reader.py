@@ -5,6 +5,7 @@ build_structure, which holds every rule. Docling is imported only when a
 reader is first used, so importing this module never needs it: CI does not
 install Docling, which pulls in PyTorch."""
 
+import re
 from pathlib import Path
 from typing import Any
 
@@ -39,6 +40,17 @@ def _label(node: Any) -> str:
     label = getattr(node, "label", "")
     return str(getattr(label, "value", label))
 
+# Word starts a new text run wherever bold or italic begins, and the space at
+# that boundary belongs to neither run.  Joining the runs with a space and then
+# closing up before punctuation restores the sentence the writer typed.
+_TIGHT = re.compile(r"\s+([,.;:!?)\]])")
+
+
+def _glue(pieces: list[str]) -> str:
+    """Formatting runs back into one sentence, with the spaces they swallowed."""
+    return _TIGHT.sub(r"\1", " ".join(piece.strip() for piece in pieces if piece.strip()))
+
+
 def _items(doc: Any, real_levels: bool) -> list[Item]:
     """Docling's tree as a flat list of items, in reading order.
     
@@ -54,7 +66,7 @@ def _items(doc: Any, real_levels: bool) -> list[Item]:
     def flush() -> None:
         nonlocal pieces, pieces_parent
         if pieces:
-            items.append(Item("text", "".join(pieces)))
+            items.append(Item("text", _glue(pieces)))
         pieces, pieces_parent = [], None
 
     for node, _depth in doc.iterate_items():
